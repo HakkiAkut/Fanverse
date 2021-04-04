@@ -1,3 +1,4 @@
+import 'package:fandom_app/view/sign_in.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,16 +6,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fandom App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Container(),
+      home: SignInPage(),
     );
   }
 }

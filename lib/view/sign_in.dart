@@ -2,6 +2,7 @@ import 'package:fandom_app/util/components/box_decoration.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -52,16 +53,43 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 12.0,
+              height: 8.0,
             ),
             _buildEmailBox(),
             SizedBox(
-              height: 24.0,
+              height: 8.0,
             ),
             _buildPasswordBox(),
             _buildLoginButton(),
-            Text("or login with"),
-            buildGoogleLoginButton()
+            Text(
+              "or login with",
+              style: labelText,
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            buildGoogleLoginButton(),
+            SizedBox(
+              height: 8.0,
+            ),
+            GestureDetector(
+              onTap: () {
+                // go to register page
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have account? ",
+                    style: labelText.copyWith(fontWeight: FontWeight.normal),
+                  ),
+                  Text(
+                    "Sign Up Now!",
+                    style: labelText,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -70,7 +98,7 @@ class _SignInPageState extends State<SignInPage> {
 
   GestureDetector buildGoogleLoginButton() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         // on progress
       },
       child: Container(

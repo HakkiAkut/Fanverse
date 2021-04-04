@@ -27,10 +27,10 @@ class _SignInPageState extends State<SignInPage> {
               height: dynamicHeight(context, 0.75),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Colors.deepOrangeAccent,Colors.deepOrange]
-                  ),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
-              ),
+                      colors: [Colors.deepOrangeAccent, Colors.deepOrange]),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40))),
               child: _buildLoginLayer(),
             )
           ],
@@ -38,6 +38,7 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
+
   /// layer that have login process components
   Container _buildLoginLayer() {
     return Container(
@@ -46,12 +47,12 @@ class _SignInPageState extends State<SignInPage> {
         right: 10,
       ),
       height: double.infinity,
-      child: Center(
-        child:Column(
+      child: Container(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 24.0,
+              height: 12.0,
             ),
             _buildEmailBox(),
             SizedBox(
@@ -59,7 +60,27 @@ class _SignInPageState extends State<SignInPage> {
             ),
             _buildPasswordBox(),
             _buildLoginButton(),
+            Text("or login with"),
+            buildGoogleLoginButton()
           ],
+        ),
+      ),
+    );
+  }
+
+  GestureDetector buildGoogleLoginButton() {
+    return GestureDetector(
+      onTap: (){
+        // on progress
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: dynamicWidth(context, 0.13),
+        height: dynamicWidth(context, 0.13),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/google_logo.jpg"), fit: BoxFit.cover),
+          borderRadius: BorderRadius.all(Radius.circular(100)),
         ),
       ),
     );
@@ -72,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
       width: double.infinity,
       child: ElevatedButton(
         style: buttonStyle,
-        onPressed: (){
+        onPressed: () {
           // on progress
         },
         child: Text(
@@ -87,7 +108,6 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-
   /// password box
   Column _buildPasswordBox() {
     return Column(
@@ -98,12 +118,12 @@ class _SignInPageState extends State<SignInPage> {
           style: labelText,
         ),
         SizedBox(
-          height: 10.0,
+          height: 5.0,
         ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: boxStyle,
-          height: 60.0,
+          height: 50.0,
           child: TextField(
             //keyboardType: TextInputType.pas,
             obscureText: true,
@@ -138,22 +158,22 @@ class _SignInPageState extends State<SignInPage> {
           style: labelText,
         ),
         SizedBox(
-          height: 10.0,
+          height: 5.0,
         ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: boxStyle,
-          height: 60.0,
+          height: 50.0,
           child: TextField(
             keyboardType: TextInputType.name,
             onChanged: (String s) => _email = s,
-            onSubmitted: (String s) => _email= s,
+            onSubmitted: (String s) => _email = s,
             style: TextStyle(
               color: Colors.white,
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
+              contentPadding: EdgeInsets.only(top: 10.0),
               prefixIcon: Icon(
                 Icons.account_circle,
                 color: Colors.white,
@@ -164,6 +184,28 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ],
+    );
+  }
+
+  /// login button
+  Container _buildGoogleLoginButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: buttonStyle,
+        onPressed: () {
+          // on progress
+        },
+        child: Text(
+          "Log In",
+          style: labelText.copyWith(
+            color: Colors.white,
+            letterSpacing: 1.5,
+            fontSize: 20.0,
+          ),
+        ),
+      ),
     );
   }
 }

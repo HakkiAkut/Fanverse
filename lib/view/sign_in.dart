@@ -14,6 +14,9 @@ class _SignInPageState extends State<SignInPage> {
   String _pwd = "";
   String _email = "";
 
+  var key1 = GlobalKey<FormFieldState>();
+  var key2 = GlobalKey<FormFieldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,35 +71,39 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(
               height: 8.0,
             ),
-            buildGoogleLoginButton(),
+            _buildGoogleLoginButton(),
             SizedBox(
               height: 8.0,
             ),
-            GestureDetector(
-              onTap: () {
-                // go to register page
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have account? ",
-                    style: labelText.copyWith(fontWeight: FontWeight.normal),
-                  ),
-                  Text(
-                    "Sign Up Now!",
-                    style: labelText,
-                  ),
-                ],
-              ),
-            )
+            _buildSignUpNowButton()
           ],
         ),
       ),
     );
   }
 
-  GestureDetector buildGoogleLoginButton() {
+  GestureDetector _buildSignUpNowButton() {
+    return GestureDetector(
+      onTap: () {
+        // go to register page
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Don't have account? ",
+            style: labelText.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Text(
+            "Sign Up Now!",
+            style: labelText,
+          ),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector _buildGoogleLoginButton() {
     return GestureDetector(
       onTap: () {
         // on progress
@@ -122,12 +129,16 @@ class _SignInPageState extends State<SignInPage> {
       child: ElevatedButton(
         style: buttonStyle,
         onPressed: () {
-          // on progress
+          if (key1.currentState.validate() && key2.currentState.validate()) {
+            key1.currentState.save();
+            key2.currentState.save();
+          } else {
+            print("hata var");
+          }
         },
         child: Text(
           "Log In",
           style: labelText.copyWith(
-            color: Colors.white,
             letterSpacing: 1.5,
             fontSize: 20.0,
           ),
@@ -149,20 +160,23 @@ class _SignInPageState extends State<SignInPage> {
           height: 5.0,
         ),
         Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxStyle,
-          height: 50.0,
-          child: TextField(
+          child: TextFormField(
             //keyboardType: TextInputType.pas,
             obscureText: true,
+            key: key2,
             onChanged: (String s) => _pwd = s,
-            onSubmitted: (String s) => _pwd = s,
+            onSaved: (String s) => _pwd = s,
             style: TextStyle(
               color: Colors.white,
             ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 12.0),
+            validator: (_value) {
+              if (_value.length < 1) {
+                return "password can not be null!";
+              } else {
+                return null;
+              }
+            },
+            decoration: inputStyle.copyWith(
               prefixIcon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -188,52 +202,34 @@ class _SignInPageState extends State<SignInPage> {
         SizedBox(
           height: 5.0,
         ),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxStyle,
-          height: 50.0,
-          child: TextField(
-            keyboardType: TextInputType.name,
-            onChanged: (String s) => _email = s,
-            onSubmitted: (String s) => _email = s,
-            style: TextStyle(
+        TextFormField(
+          key: key1,
+          keyboardType: TextInputType.name,
+          onChanged: (String s) => _email = s,
+          onSaved: (String s) => _email = s,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+          validator: (_value) {
+            bool validation = RegExp(
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                .hasMatch(_value);
+            if (!validation) {
+              return "invalid email!";
+            } else {
+              return null;
+            }
+          },
+          decoration: inputStyle.copyWith(
+            prefixIcon: Icon(
+              Icons.account_circle,
               color: Colors.white,
             ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 10.0),
-              prefixIcon: Icon(
-                Icons.account_circle,
-                color: Colors.white,
-              ),
-              hintText: 'email',
-              hintStyle: hintText,
-            ),
+            hintText: 'email',
+            hintStyle: hintText,
           ),
         ),
       ],
-    );
-  }
-
-  /// login button
-  Container _buildGoogleLoginButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: ElevatedButton(
-        style: buttonStyle,
-        onPressed: () {
-          // on progress
-        },
-        child: Text(
-          "Log In",
-          style: labelText.copyWith(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 20.0,
-          ),
-        ),
-      ),
     );
   }
 }

@@ -1,22 +1,24 @@
-import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/button_style.dart';
+import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
+
   String _pwd = "";
   String _email = "";
+  String _username= "";
 
   var key1 = GlobalKey<FormFieldState>();
   var key2 = GlobalKey<FormFieldState>();
+  var key3 = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class _SignInPageState extends State<SignInPage> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40))),
-              child: _buildLoginLayer(),
+              child: _buildSignUpLayer(),
             )
           ],
         ),
@@ -44,8 +46,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  /// layer that have login process components
-  Container _buildLoginLayer() {
+  Container _buildSignUpLayer() {
     return Container(
       margin: EdgeInsets.only(
         left: 10,
@@ -64,66 +65,23 @@ class _SignInPageState extends State<SignInPage> {
               height: 8.0,
             ),
             _buildPasswordBox(),
-            _buildLoginButton(),
-            Text(
-              "or login with",
-              style: labelText,
-            ),
             SizedBox(
               height: 8.0,
             ),
-            _buildGoogleLoginButton(),
+            _buildUsernameBox(),
+            _buildSignUpButton(),
             SizedBox(
               height: 8.0,
             ),
-            _buildSignUpNowButton()
+            _buildSignInNowButton()
           ],
         ),
       ),
     );
   }
 
-  GestureDetector _buildSignUpNowButton() {
-    return GestureDetector(
-      onTap: () {
-        // go to register page
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Don't have account? ",
-            style: labelText.copyWith(fontWeight: FontWeight.normal),
-          ),
-          Text(
-            "Sign Up Now!",
-            style: labelText,
-          ),
-        ],
-      ),
-    );
-  }
-
-  GestureDetector _buildGoogleLoginButton() {
-    return GestureDetector(
-      onTap: () {
-        // on progress
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: dynamicWidth(context, 0.13),
-        height: dynamicWidth(context, 0.13),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/google_logo.jpg"), fit: BoxFit.cover),
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-        ),
-      ),
-    );
-  }
-
   /// login button
-  Container _buildLoginButton() {
+  Container _buildSignUpButton() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -213,7 +171,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           validator: (_value) {
             bool validation = RegExp(
-                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                 .hasMatch(_value);
             if (!validation) {
               return "invalid email!";
@@ -223,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
           },
           decoration: inputStyle.copyWith(
             prefixIcon: Icon(
-              Icons.account_circle,
+              Icons.mail_sharp,
               color: Colors.white,
             ),
             hintText: 'email',
@@ -232,5 +190,66 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ],
     );
+  }
+  /// Email box
+  Column _buildUsernameBox() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "username:",
+          style: labelText,
+        ),
+        SizedBox(
+          height: 5.0,
+        ),
+        TextFormField(
+          key: key3,
+          keyboardType: TextInputType.name,
+          onChanged: (String s) => _username = s,
+          onSaved: (String s) => _username = s,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+          validator: (_value) {
+            if (_value.length<=3) {
+              return "username must be greater than 3 characters!";
+            } else {
+              return null;
+            }
+          },
+          decoration: inputStyle.copyWith(
+            prefixIcon: Icon(
+              Icons.account_circle,
+              color: Colors.white,
+            ),
+            hintText: 'username',
+            hintStyle: hintText,
+          ),
+        ),
+      ],
+    );
+  }
+
+  GestureDetector _buildSignInNowButton() {
+    return GestureDetector(
+      onTap: () {
+        // go to sign in page
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Already have account? ",
+            style: labelText.copyWith(fontWeight: FontWeight.normal),
+          ),
+          Text(
+            "Sign In Now!",
+            style: labelText,
+          ),
+        ],
+      ),
+    );
+
   }
 }

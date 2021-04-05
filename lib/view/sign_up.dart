@@ -1,10 +1,14 @@
+import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view/sign_in.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -68,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 8.0,
             ),
             _buildUsernameBox(),
-            _buildSignUpButton(),
+            _buildSignUpButton(context),
             SizedBox(
               height: 8.0,
             ),
@@ -80,13 +84,14 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   /// login button
-  Container _buildSignUpButton() {
+  Container _buildSignUpButton(BuildContext context) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
         style: buttonStyle,
-        onPressed: () {
+        onPressed: () async {
           if (key1.currentState.validate() &&
               key2.currentState.validate() &&
               key3.currentState.validate()) {
@@ -94,7 +99,8 @@ class _SignUpPageState extends State<SignUpPage> {
             key2.currentState.save();
             key3.currentState.save();
             // ToDo sign up process
-
+            AppUser appUser =
+                await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd);
           } else {
             print("hata var");
           }
@@ -239,11 +245,13 @@ class _SignUpPageState extends State<SignUpPage> {
   GestureDetector _buildSignInNowButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (context) => SignInPage(),
+            builder: (context) => RootPage(
+              goToSignIn: true,
+            ),
           ),
         );
       },

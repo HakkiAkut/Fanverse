@@ -1,12 +1,16 @@
+import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view/sign_up.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -69,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
               height: 8.0,
             ),
             _buildPasswordBox(),
-            _buildLoginButton(),
+            _buildLoginButton(context),
             Text(
               "or login with",
               style: labelText,
@@ -91,7 +95,13 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildSignUpNowButton() {
     return GestureDetector(
       onTap: () {
-        // go to register page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => RootPage(goToSignIn: false,),
+          ),
+        );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -112,13 +122,7 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildGoogleLoginButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            fullscreenDialog: true,
-            builder: (context) => SignUpPage(),
-          ),
-        );
+
       },
       child: Container(
         alignment: Alignment.center,
@@ -134,16 +138,19 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   /// login button
-  Container _buildLoginButton() {
+  Container _buildLoginButton(BuildContext context) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
         style: buttonStyle,
-        onPressed: () {
+        onPressed: () async {
           if (key1.currentState.validate() && key2.currentState.validate()) {
             key1.currentState.save();
             key2.currentState.save();
+            AppUser appUser = await _appUserVM.signInWithEmail(email: _email,pwd: _pwd);
+            print(appUser.email);
           } else {
             print("hata var");
           }

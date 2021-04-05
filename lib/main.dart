@@ -1,5 +1,5 @@
-import 'package:fandom_app/view/sign_in.dart';
-import 'package:fandom_app/view/sign_up.dart';
+import 'package:fandom_app/util/constants/colors.dart';
+import 'package:fandom_app/view/root.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -10,20 +10,16 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fandom App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: mainColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignUpPage(),
+      home: RootPage(),
     );
   }
 }
-
-
-

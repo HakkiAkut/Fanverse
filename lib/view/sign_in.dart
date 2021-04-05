@@ -3,6 +3,7 @@ import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,15 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+
+
   String _pwd = "";
   String _email = "";
 
   var key1 = GlobalKey<FormFieldState>();
   var key2 = GlobalKey<FormFieldState>();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +36,7 @@ class _SignInPageState extends State<SignInPage> {
             Container(
               height: dynamicHeight(context, 0.75),
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: gradientColor),
+                  gradient: LinearGradient(colors: gradientColor),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40))),

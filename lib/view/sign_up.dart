@@ -11,10 +11,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   String _pwd = "";
   String _email = "";
-  String _username= "";
+  String _username = "";
 
   var key1 = GlobalKey<FormFieldState>();
   var key2 = GlobalKey<FormFieldState>();
@@ -33,8 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               height: dynamicHeight(context, 0.75),
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: gradientColor),
+                  gradient: LinearGradient(colors: gradientColor),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40))),
@@ -88,9 +86,13 @@ class _SignUpPageState extends State<SignUpPage> {
       child: ElevatedButton(
         style: buttonStyle,
         onPressed: () {
-          if (key1.currentState.validate() && key2.currentState.validate()) {
+          if (key1.currentState.validate() &&
+              key2.currentState.validate() &&
+              key3.currentState.validate()) {
             key1.currentState.save();
             key2.currentState.save();
+            key3.currentState.save();
+            // ToDo sign up process
           } else {
             print("hata var");
           }
@@ -171,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           validator: (_value) {
             bool validation = RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                 .hasMatch(_value);
             if (!validation) {
               return "invalid email!";
@@ -191,6 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ],
     );
   }
+
   /// Email box
   Column _buildUsernameBox() {
     return Column(
@@ -212,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
             color: Colors.white,
           ),
           validator: (_value) {
-            if (_value.length<=3) {
+            if (_value.length <= 3) {
               return "username must be greater than 3 characters!";
             } else {
               return null;
@@ -250,6 +253,5 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
-
   }
 }

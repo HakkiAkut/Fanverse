@@ -3,6 +3,7 @@ import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/view/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -93,6 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
             key2.currentState.save();
             key3.currentState.save();
             // ToDo sign up process
+
           } else {
             print("hata var");
           }
@@ -237,7 +239,13 @@ class _SignUpPageState extends State<SignUpPage> {
   GestureDetector _buildSignInNowButton() {
     return GestureDetector(
       onTap: () {
-        // go to sign in page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => SignInPage(),
+          ),
+        );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -34,4 +34,11 @@ class Auth implements AuthMethods {
         ? AppUser(uid: user.uid, email: user.email, username: "")
         : null;
   }
+
+  @override
+  Future<AppUser> signUpWithEmail({String email, String pwd}) async {
+    UserCredential credential =
+        await _auth.createUserWithEmailAndPassword(email: email, password: pwd);
+    return convertUserToAppUser(credential.user);
+  }
 }

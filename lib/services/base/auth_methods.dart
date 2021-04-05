@@ -5,5 +5,6 @@ import 'package:flutter/cupertino.dart';
 abstract class AuthMethods{
   Future<AppUser> currentUser();
   Future<AppUser> signInWithEmail({@required String email, @required String pwd});
+  Future<AppUser> signUpWithEmail({@required String email, @required String pwd});
   Future<bool> signOut();
 }

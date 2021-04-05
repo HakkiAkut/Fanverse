@@ -1,1 +1,1 @@
-enum appState { IDLE, BUSY }
+enum AppState { IDLE, BUSY }

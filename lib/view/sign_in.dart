@@ -3,6 +3,7 @@ import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/view/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +112,13 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildGoogleLoginButton() {
     return GestureDetector(
       onTap: () {
-        // on progress
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => SignUpPage(),
+          ),
+        );
       },
       child: Container(
         alignment: Alignment.center,

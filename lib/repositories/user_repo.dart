@@ -42,4 +42,15 @@ class UserRepo implements AuthMethods{
     }
   }
 
+  @override
+  Future<AppUser> signUpWithEmail({String email, String pwd}) async {
+    if(_webService == WebService.FIREBASE){
+      AppUser appUser = await _auth.signUpWithEmail(email: email,pwd: pwd);
+      if (appUser != null) {
+        return appUser;
+      }
+    }
+    return null;
+  }
+
 }

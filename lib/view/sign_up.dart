@@ -2,6 +2,7 @@ import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
+import 'package:fandom_app/util/components/toast_message.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/view/root.dart';
@@ -98,9 +99,12 @@ class _SignUpPageState extends State<SignUpPage> {
             key1.currentState.save();
             key2.currentState.save();
             key3.currentState.save();
-            // ToDo sign up process
-            AppUser appUser =
-                await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd);
+            try {
+              AppUser appUser =
+              await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd);
+            } catch(e){
+              errorMessage(message: "Sign up could not made!\n${e.toString()}",durationShort: false);
+            }
           } else {
             print("hata var");
           }

@@ -21,5 +21,5 @@ Activity Diagram
 ![auth-uml-diagram](https://user-images.githubusercontent.com/32385870/113706028-d9768600-96e6-11eb-8237-793673d7163a.png)
 
 This diagram only shows sign in process but sign up process is very similar to that. Only changes SignInPage to SignUpPage and signInWithEmail() to signUpWithEmail().
-When SignInPage navigates to SignUpPage it firstly goes to RootPage and clear navigation stack before then goes to SignUpPage. So same system works perfectly on sign in process too.
+When SignInPage navigates to SignUpPage it firstly goes to RootPage and clear navigation stack before then goes to SignUpPage. So, same system works perfectly on sign up process too.
 

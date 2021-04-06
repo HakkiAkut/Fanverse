@@ -6,4 +6,19 @@ A new flutter application. It's an fan page app.
 Before start the project, i decide to use MVVM structure.
 ![mvvm](https://user-images.githubusercontent.com/32385870/113514652-9bf3ea80-9578-11eb-8d65-e91a38a2d9c5.png)
 
+View: manages user intefaces, if AppState is BUSY shows CircuarProgressIndicator(), If not then shows screens(SignInPage, HomePage etc. )
+
+ViewModel: manages AppState, if there is a call for back-end methods(SignInWithEmail() etc.) changes AppState to BUSY, when back-end method returns then changes AppState to IDLE. 
+
+Repository(Model): controls which serivce is used, with this if we decide to change web service or add new one it would be much more easier to implement
+
+Service(Model):Does back-end operations and returns needed data.
+
+## Authentication
+
+Activity Diagram
+
+![auth-uml-diagram](https://user-images.githubusercontent.com/32385870/113705623-53f2d600-96e6-11eb-98c7-1614e01c981a.png)
+
+This diagram only shows sign in process but sign up process is very similar to that. Only changes SignInPage to SignUpPage and signInWithEmail() to signUpWithEmail().
 

@@ -259,7 +259,9 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         );
       },
-      child: Row(
+      child: Container(
+        padding: EdgeInsets.all(5),
+        child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
@@ -271,7 +273,7 @@ class _SignUpPageState extends State<SignUpPage> {
             style: labelText,
           ),
         ],
-      ),
+      ),),
     );
   }
 }

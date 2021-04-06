@@ -102,18 +102,21 @@ class _SignInPageState extends State<SignInPage> {
           ),
         );
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Don't have account? ",
-            style: labelText.copyWith(fontWeight: FontWeight.normal),
-          ),
-          Text(
-            "Sign Up Now!",
-            style: labelText,
-          ),
-        ],
+      child: Container(
+        padding: EdgeInsets.all(5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Don't have account? ",
+              style: labelText.copyWith(fontWeight: FontWeight.normal),
+            ),
+            Text(
+              "Sign Up Now!",
+              style: labelText,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -106,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
           }
         },
         child: Text(
-          "Log In",
+          "Sign Up",
           style: labelText.copyWith(
             letterSpacing: 1.5,
             fontSize: 20.0,

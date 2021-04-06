@@ -1,4 +1,3 @@
-import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/constants/app_state_enum.dart';
 import 'package:fandom_app/view/home_page.dart';
 import 'package:fandom_app/view/sign_in.dart';

@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildGoogleLoginButton() {
     return GestureDetector(
       onTap: () {
-        errorMessage(message: "Currently on progress!",durationShort: true);
+        errorMessage(message: "Currently on progress!\nPlease login with email!",durationShort: true);
       },
       child: Container(
         alignment: Alignment.center,

@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("Welcome ${_appUserVM.appUser.email}"),
             Text(
               "Currently on progress...",
               style: TextStyle(fontSize: 25),

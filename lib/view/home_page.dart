@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 bool signOut = await _appUserVM.signOut();
                 if(!signOut){
-                  errorMessage(message: "Your log out could not be made!\nPlease try again!");
+                  errorMessage(message: "Your log out could not be made!\nPlease try again!",durationShort: true);
                 }
               },
             )

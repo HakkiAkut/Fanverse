@@ -1,6 +1,10 @@
 # fandom_app
 
-A new flutter application. It's an fan page app.
+A new Flutter application. It's an fan page app.
+
+minSdkVersion 16
+
+targetSdkVersion 29
 
 ## Getting Started
 Before start the project, i decide to use MVVM structure.

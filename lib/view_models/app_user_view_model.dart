@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 class AppUserVM with ChangeNotifier implements AuthMethods {
   AppState _state = AppState.IDLE;
 
-  UserRepo _userRepo = serviceLocator<UserRepo>();
+  Repository _repository = serviceLocator<Repository>();
   AppUser _appUser;
   String errorMessage;
   final pattern = r'(^(?:[+])?[0-9]{10,12}$)';
@@ -30,7 +30,7 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
   Future<AppUser> currentUser() async {
     try {
       state = AppState.BUSY;
-      _appUser = await _userRepo.currentUser();
+      _appUser = await _repository.currentUser();
       if (_appUser != null) {
         return _appUser;
       } else {
@@ -45,7 +45,7 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
   Future<AppUser> signInWithEmail({String email, String pwd}) async {
     try {
       state = AppState.BUSY;
-      _appUser = await _userRepo.signInWithEmail(email: email, pwd: pwd);
+      _appUser = await _repository.signInWithEmail(email: email, pwd: pwd);
       return _appUser;
     } finally {
       state = AppState.IDLE;
@@ -57,7 +57,7 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
     try {
       state = AppState.BUSY;
       _appUser = null;
-      return await _userRepo.signOut();
+      return await _repository.signOut();
     } finally {
       state = AppState.IDLE;
     }
@@ -67,7 +67,7 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
   Future<AppUser> signUpWithEmail({String email, String pwd}) async {
     try {
       state = AppState.BUSY;
-      _appUser = await _userRepo.signUpWithEmail(email: email, pwd: pwd);
+      _appUser = await _repository.signUpWithEmail(email: email, pwd: pwd);
       return _appUser;
     } finally {
       state = AppState.IDLE;

@@ -6,7 +6,6 @@ import 'package:fandom_app/services/base/database_methods.dart';
 
 class Firestore implements DatabaseMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  StreamController ss;
 
   @override
   Stream<List<News>> getNews() {
@@ -16,7 +15,7 @@ class Firestore implements DatabaseMethods {
         .snapshots();
 
     return qp.map(
-        (docs) => docs.docs.map((doc) => News(title: doc['title'])).toList());
+        (docs) => docs.docs.map((doc) => News.fromMap(doc.data())).toList());
 
   }
 }

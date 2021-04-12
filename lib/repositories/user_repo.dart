@@ -8,7 +8,7 @@ import 'package:fandom_app/util/init/service_locator.dart';
 /// If WebService is FIREBASE then it will work with firebase methods
 /// otherwise if there is another service it will work with other one.
 /// Works like DAO manager basically.
-class UserRepo implements AuthMethods{
+class Repository implements AuthMethods{
   Auth _auth = serviceLocator<Auth>();
   WebService _webService = WebService.FIREBASE;
   @override

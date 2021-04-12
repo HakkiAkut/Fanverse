@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
-import 'package:fandom_app/services/firebase/firestore.dart';
+import 'package:fandom_app/services/firebase/firestore_db.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/components/toast_message.dart';
@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  Firestore firestore = Firestore();
+  FirestoreDB firestore = FirestoreDB();
 
   @override
   Widget build(BuildContext context) {

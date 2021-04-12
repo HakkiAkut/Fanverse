@@ -8,4 +8,5 @@ void initializeLocator() {
   serviceLocator
       .registerLazySingleton(() => Auth()); // Firebase Authentication Service
   serviceLocator.registerLazySingleton(() => UserRepo()); // User repository
+  //serviceLocator.registerLazySingleton(() => )
 }

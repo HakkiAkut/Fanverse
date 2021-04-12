@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
+import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/services/firebase/firestore.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/components/toast_message.dart';
@@ -17,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Firestore firestore = Firestore();
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +34,27 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Welcome ${_appUserVM.appUser.email}"),
-            Text(
-              "Currently on progress...",
-              style: TextStyle(fontSize: 25),
-            ),
+            StreamBuilder<List<News>>(
+                stream: firestore.getNews(),
+                builder: (context, AsyncSnapshot<List<News>> snapshot) {
+                  return !snapshot.hasData ?
+                  CircularProgressIndicator() :
+                  ListView.separated(itemBuilder:(context, index) {
+                    print("${snapshot.data[index].title}");
+                    return Text("${snapshot.data[index].title}");
+                  },
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.indigo,
+                          height: 1,
+                          indent: 10,
+                          endIndent: 10,
+                        );
+                      },
+                    itemCount: snapshot.data.length);
+                }),
             ElevatedButton(
               style: buttonStyle,
               child: Text(
@@ -43,8 +63,11 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () async {
                 bool signOut = await _appUserVM.signOut();
-                if(!signOut){
-                  errorMessage(message: "Your log out could not be made!\nPlease try again!",durationShort: true);
+                if (!signOut) {
+                  errorMessage(
+                      message:
+                      "Your log out could not be made!\nPlease try again!",
+                      durationShort: true);
                 }
               },
             )

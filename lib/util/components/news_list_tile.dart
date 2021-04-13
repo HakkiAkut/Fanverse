@@ -51,7 +51,7 @@ Container newsListTile({@required BuildContext context, @required News news}) {
                   fontSize: 18, color: Colors.black.withOpacity(0.8)),
             ),
             Text(
-              DateFormat.yMMM().format(news.date.toDate()),
+              DateFormat.yMMMd().format(news.date.toDate()),
               style: labelText.copyWith(
                   color: Colors.black.withOpacity(0.8)),
             )

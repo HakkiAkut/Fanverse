@@ -2,7 +2,9 @@ import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Container newsListTile({@required BuildContext context, @required News news}) {
   return Container(
@@ -21,7 +23,7 @@ Container newsListTile({@required BuildContext context, @required News news}) {
     child: Column(
       children: [
         Container(
-          height: dynamicWidth(context, 0.70),
+          height: dynamicWidth(context, 0.50),
           decoration: BoxDecoration(
             color: mainColor.shade200,
             boxShadow: [
@@ -40,10 +42,20 @@ Container newsListTile({@required BuildContext context, @required News news}) {
         SizedBox(
           height: 8.0,
         ),
-        Text(
-          news.title,
-          style: labelText.copyWith(
-              fontSize: 18, color: Colors.black.withOpacity(0.8)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              news.title,
+              style: labelText.copyWith(
+                  fontSize: 18, color: Colors.black.withOpacity(0.8)),
+            ),
+            Text(
+              DateFormat.yMMM().format(news.date.toDate()),
+              style: labelText.copyWith(
+                  color: Colors.black.withOpacity(0.8)),
+            )
+          ],
         ),
         SizedBox(
           height: 8.0,

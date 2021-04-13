@@ -29,22 +29,23 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Home Page"),
-        actions: [              ElevatedButton(
-          style: buttonStyle,
-          child: Text(
-            "Log out",
-            style: labelText,
+        actions: [
+          ElevatedButton(
+            style: buttonStyle,
+            child: Text(
+              "Log out",
+              style: labelText,
+            ),
+            onPressed: () async {
+              bool signOut = await _appUserVM.signOut();
+              if (!signOut) {
+                errorMessage(
+                    message:
+                        "Your log out could not be made!\nPlease try again!",
+                    durationShort: true);
+              }
+            },
           ),
-          onPressed: () async {
-            bool signOut = await _appUserVM.signOut();
-            if (!signOut) {
-              errorMessage(
-                  message:
-                  "Your log out could not be made!\nPlease try again!",
-                  durationShort: true);
-            }
-          },
-        )
         ],
       ),
       body: SingleChildScrollView(
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       separatorBuilder: (context, index) {
-                        return         SizedBox(
+                        return SizedBox(
                           height: 18.0,
                         );
                       },

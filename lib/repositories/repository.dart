@@ -64,6 +64,7 @@ class Repository implements AuthMethods, DatabaseMethods{
     if(_databaseService == DatabaseService.FIRESTORE){
       return _firestore.getNews(limit: limit);
     }
+    return null;
   }
 
 }

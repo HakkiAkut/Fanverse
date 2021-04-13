@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class RootPage extends StatelessWidget {
   bool goToSignIn;
+
   RootPage({this.goToSignIn});
 
   @override
@@ -17,8 +18,15 @@ class RootPage extends StatelessWidget {
     final _appUserVM = Provider.of<AppUserVM>(context);
     if (_appUserVM.state == AppState.IDLE) {
       return _appUserVM.appUser != null
-          ? StreamProvider<List<News>>.value(value: NewsVM().getNews(),child: HomePage(appUser: _appUserVM.appUser),)
-          : goToSignIn ? SignInPage():SignUpPage();
+          ? StreamProvider<List<News>>.value(
+              value: NewsVM().getNews(),
+              child: HomePage(appUser: _appUserVM.appUser),
+              initialData: [],
+              updateShouldNotify: (prev,now)=>true,
+            )
+          : goToSignIn
+              ? SignInPage()
+              : SignUpPage();
     } else {
       return Scaffold(
         body: Center(

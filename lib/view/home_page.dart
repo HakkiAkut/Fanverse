@@ -64,11 +64,8 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       separatorBuilder: (context, index) {
-                        return Divider(
-                          color: Colors.white,
-                          height: 10,
-                          indent: 10,
-                          endIndent: 10,
+                        return         SizedBox(
+                          height: 18.0,
                         );
                       },
                       itemCount: _newsVM.length),

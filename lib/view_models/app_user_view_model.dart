@@ -10,8 +10,6 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
 
   Repository _repository = serviceLocator<Repository>();
   AppUser _appUser;
-  String errorMessage;
-  final pattern = r'(^(?:[+])?[0-9]{10,12}$)';
 
   AppUser get appUser => _appUser;
 

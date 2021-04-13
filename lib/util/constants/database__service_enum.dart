@@ -1,0 +1,1 @@
+enum DatabaseService{FIRESTORE, DEBUG}

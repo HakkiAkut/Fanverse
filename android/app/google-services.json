@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "764098905293-8n65bk609c479p0bnu3f0t60kvkj8e9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.fandom_app",
+            "certificate_hash": "00358251a45f2bb64e010b2feaeb50f13fbfc809"
+          }
+        },
+        {
           "client_id": "764098905293-prnm6t3uv6a4hio9qkkqhdeftcts7a8p.apps.googleusercontent.com",
           "client_type": 3
         }

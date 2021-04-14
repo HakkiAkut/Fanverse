@@ -17,15 +17,11 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
-
   String _pwd = "";
   String _email = "";
 
   var key1 = GlobalKey<FormFieldState>();
   var key2 = GlobalKey<FormFieldState>();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +68,7 @@ class _SignInPageState extends State<SignInPage> {
               height: 8.0,
             ),
             _buildPasswordBox(),
-            _buildLoginButton(context),
+            _buildLoginButton(context: context),
             Text(
               "or login with",
               style: labelText,
@@ -80,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(
               height: 8.0,
             ),
-            _buildGoogleLoginButton(),
+            _buildGoogleLoginButton(context: context),
             SizedBox(
               height: 8.0,
             ),
@@ -98,7 +94,9 @@ class _SignInPageState extends State<SignInPage> {
           context,
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (context) => RootPage(goToSignIn: false,),
+            builder: (context) => RootPage(
+              goToSignIn: false,
+            ),
           ),
         );
       },
@@ -121,10 +119,19 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  GestureDetector _buildGoogleLoginButton() {
+  GestureDetector _buildGoogleLoginButton({@required BuildContext context}) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return GestureDetector(
-      onTap: () {
-        errorMessage(message: "Currently on progress!\nPlease login with email!",durationShort: true);
+      onTap: () async {
+        //errorMessage(message: "Currently on progress!\nPlease login with email!",durationShort: true);
+        AppUser appUser;
+        try {
+          appUser = await _appUserVM.signInWithGoogle();
+        } catch (e) {
+          errorMessage(
+              message: "Sign in could not be made\n ${e.toString()}",
+              durationShort: false);
+        }
       },
       child: Container(
         alignment: Alignment.center,
@@ -140,7 +147,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   /// login button
-  Container _buildLoginButton(BuildContext context) {
+  Container _buildLoginButton({@required BuildContext context}) {
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -152,10 +159,13 @@ class _SignInPageState extends State<SignInPage> {
             key1.currentState.save();
             key2.currentState.save();
             AppUser appUser;
-            try{
-              appUser = await _appUserVM.signInWithEmail(email: _email,pwd: _pwd);
-            } catch(e){
-              errorMessage(message: "Sign in could not be made\n ${e.toString()}",durationShort: false);
+            try {
+              appUser =
+                  await _appUserVM.signInWithEmail(email: _email, pwd: _pwd);
+            } catch (e) {
+              errorMessage(
+                  message: "Sign in could not be made\n ${e.toString()}",
+                  durationShort: false);
             }
           } else {
             print("hata var");

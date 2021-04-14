@@ -12,14 +12,15 @@ import 'package:fandom_app/util/init/service_locator.dart';
 /// If WebService is FIREBASE then it will work with firebase methods
 /// otherwise if there is another service it will work with other one.
 /// Works like DAO manager basically.
-class Repository implements AuthMethods, DatabaseMethods{
+class Repository implements AuthMethods, DatabaseMethods {
   Auth _auth = serviceLocator<Auth>();
-  FirestoreDB _firestore= serviceLocator<FirestoreDB>();
+  FirestoreDB _firestore = serviceLocator<FirestoreDB>();
   WebService _webService = WebService.FIREBASE;
-  DatabaseService _databaseService =DatabaseService.FIRESTORE;
+  DatabaseService _databaseService = DatabaseService.FIRESTORE;
+
   @override
   Future<AppUser> currentUser() async {
-    if(_webService == WebService.FIREBASE){
+    if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.currentUser();
       if (appUser != null) {
         return appUser;
@@ -30,8 +31,8 @@ class Repository implements AuthMethods, DatabaseMethods{
 
   @override
   Future<AppUser> signInWithEmail({String email, String pwd}) async {
-    if(_webService == WebService.FIREBASE){
-      AppUser appUser = await _auth.signInWithEmail(email: email,pwd: pwd);
+    if (_webService == WebService.FIREBASE) {
+      AppUser appUser = await _auth.signInWithEmail(email: email, pwd: pwd);
       if (appUser != null) {
         return appUser;
       }
@@ -50,8 +51,19 @@ class Repository implements AuthMethods, DatabaseMethods{
 
   @override
   Future<AppUser> signUpWithEmail({String email, String pwd}) async {
-    if(_webService == WebService.FIREBASE){
-      AppUser appUser = await _auth.signUpWithEmail(email: email,pwd: pwd);
+    if (_webService == WebService.FIREBASE) {
+      AppUser appUser = await _auth.signUpWithEmail(email: email, pwd: pwd);
+      if (appUser != null) {
+        return appUser;
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future<AppUser> signInWithGoogle() async {
+    if (_webService == WebService.FIREBASE) {
+      AppUser appUser = await _auth.signInWithGoogle();
       if (appUser != null) {
         return appUser;
       }
@@ -61,10 +73,9 @@ class Repository implements AuthMethods, DatabaseMethods{
 
   @override
   Stream<List<News>> getNews({int limit}) {
-    if(_databaseService == DatabaseService.FIRESTORE){
+    if (_databaseService == DatabaseService.FIRESTORE) {
       return _firestore.getNews(limit: limit);
     }
     return null;
   }
-
 }

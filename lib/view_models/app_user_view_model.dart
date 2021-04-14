@@ -71,4 +71,15 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
       state = AppState.IDLE;
     }
   }
+
+  @override
+  Future<AppUser> signInWithGoogle() async {
+    try {
+      state = AppState.BUSY;
+      _appUser = await _repository.signInWithGoogle();
+      return _appUser;
+    } finally {
+      state = AppState.IDLE;
+    }
+  }
 }

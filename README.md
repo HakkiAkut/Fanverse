@@ -22,7 +22,7 @@ Service(Model):Does back-end operations and returns needed data.
 
 Activity Diagram
 
-![auth-uml-diagram](https://user-images.githubusercontent.com/32385870/113706028-d9768600-96e6-11eb-8237-793673d7163a.png)
+![auth-activity-diagram](https://user-images.githubusercontent.com/32385870/114678926-64bdd000-9d14-11eb-9d69-d754c3f540fa.png)
 
 This diagram only shows sign in process but sign up process is very similar to that. Only changes SignInPage to SignUpPage and signInWithEmail() to signUpWithEmail().
 When SignInPage navigates to SignUpPage it firstly goes to RootPage and clear navigation stack before then goes to SignUpPage. So, same system works perfectly on sign up process too.

@@ -38,6 +38,13 @@ class TabLayout {
             icon2: Icons.arrow_right,
             navigation: NavigationConstants.HOME_PAGE,
           ),
+          _customListTile(
+            context: context,
+            icon1: Icons.account_box,
+            text: "Profile",
+            icon2: Icons.arrow_right,
+            navigation: NavigationConstants.PROFILE,
+          ),
         ],
       ),
     );
@@ -75,6 +82,10 @@ class TabLayout {
           switch (navigation) {
             case NavigationConstants.HOME_PAGE:
               Navigator.pushNamed(context, NavigationConstants.ROOT);
+              break;
+            case NavigationConstants.PROFILE:
+              Navigator.pushNamed(context, NavigationConstants.PROFILE);
+              break;
           }
         },
       ),

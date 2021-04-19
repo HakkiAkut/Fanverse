@@ -1,6 +1,7 @@
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/view/home_page.dart';
 import 'package:fandom_app/view/news_more.dart';
+import 'package:fandom_app/view/profile.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,11 @@ class RouteGenerator {
       case '/HomePage':
         return MaterialPageRoute(
           builder: (_) => HomePage(),
+        );
+
+      case '/ProfilePage':
+        return MaterialPageRoute(
+          builder: (_) => ProfilePage(),
         );
 
       case '/NewsMorePage':

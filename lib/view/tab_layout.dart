@@ -113,7 +113,7 @@ class TabLayout {
         onTap: () async {
           switch (navigation) {
             case NavigationConstants.HOME_PAGE:
-              Navigator.pushNamed(context, NavigationConstants.ROOT);
+              Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,arguments: true);
               break;
             case NavigationConstants.PROFILE:
               Navigator.pushNamed(context, NavigationConstants.PROFILE);

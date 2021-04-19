@@ -5,6 +5,7 @@ import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/components/toast_message.dart';
 import 'package:fandom_app/util/constants/colors.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,15 +91,7 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildSignUpNowButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            fullscreenDialog: true,
-            builder: (context) => RootPage(
-              goToSignIn: false,
-            ),
-          ),
-        );
+        Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,arguments: false);
       },
       child: Container(
         padding: EdgeInsets.all(5.0),

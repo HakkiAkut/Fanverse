@@ -1,4 +1,5 @@
 import 'package:fandom_app/util/constants/colors.dart';
+import 'package:fandom_app/util/init/route_generator.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
@@ -25,7 +26,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: mainColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: RootPage(goToSignIn: true,),
+        home: RootPage(
+          goToSignIn: true,
+        ),
+        onGenerateRoute: RouteGenerator.initializeRoute,
+        onUnknownRoute: (RouteSettings settings) => MaterialPageRoute(
+          builder: (context) => RootPage(),
+        ), // if there is any problem with navigation returns to the Root
       ),
     );
   }

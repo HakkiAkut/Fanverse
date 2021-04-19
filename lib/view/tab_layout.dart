@@ -1,3 +1,4 @@
+import 'package:fandom_app/util/components/toast_message.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
@@ -109,7 +110,7 @@ class TabLayout {
           icon2,
           color: Palette.BOLD_COLOR,
         ),
-        onTap: () {
+        onTap: () async {
           switch (navigation) {
             case NavigationConstants.HOME_PAGE:
               Navigator.pushNamed(context, NavigationConstants.ROOT);
@@ -127,7 +128,13 @@ class TabLayout {
               Navigator.pushNamed(context, NavigationConstants.RECOMMENDATION);
               break;
             case NavigationConstants.SIGN_OUT:
-              _appUserVM.signOut();
+              bool signOut = await _appUserVM.signOut();
+              if (!signOut) {
+                errorMessage(
+                    message:
+                        "Your log out could not be made!\nPlease try again!",
+                    durationShort: true);
+              }
               break;
           }
         },

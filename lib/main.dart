@@ -1,4 +1,4 @@
-import 'package:fandom_app/util/constants/colors.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/init/route_generator.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:fandom_app/view/root.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Fandom App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: mainColor,
+          primarySwatch: Palette.MAIN_COLOR,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: RootPage(

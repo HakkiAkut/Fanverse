@@ -1,6 +1,6 @@
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/util/components/text_style.dart';
-import 'package:fandom_app/util/constants/colors.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/view/news_more.dart';
@@ -25,9 +25,9 @@ Container newsListTile({@required BuildContext context, @required News news}) {
     child: Column(
       children: [
         Container(
-          height: dynamicWidth(context, 0.50),
+          height: DynamicSize.dynamicWidth(context, 0.50),
           decoration: BoxDecoration(
-            color: mainColor.shade200,
+            color: Palette.MAIN_COLOR.shade200,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),

@@ -3,7 +3,7 @@ import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/components/toast_message.dart';
-import 'package:fandom_app/util/constants/colors.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/view/root.dart';
@@ -32,13 +32,13 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             Container(
-              height: dynamicHeight(context, 0.25),
+              height: DynamicSize.dynamicHeight(context, 0.25),
               child: Image.asset("assets/logo.png"),
             ),
             Container(
-              height: dynamicHeight(context, 0.75),
+              height: DynamicSize.dynamicHeight(context, 0.75),
               decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: gradientColor),
+                  gradient: LinearGradient(colors: Palette.GRADIENT_COLOR),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40))),

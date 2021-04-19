@@ -1,7 +1,10 @@
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/view/fandoms.dart';
 import 'package:fandom_app/view/home_page.dart';
+import 'package:fandom_app/view/my_fandoms.dart';
 import 'package:fandom_app/view/news_more.dart';
 import 'package:fandom_app/view/profile.dart';
+import 'package:fandom_app/view/recommendation.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +35,21 @@ class RouteGenerator {
       case '/ProfilePage':
         return MaterialPageRoute(
           builder: (_) => ProfilePage(),
+        );
+
+      case '/FandomsPage':
+        return MaterialPageRoute(
+          builder: (_) => FandomsPage(),
+        );
+
+      case '/MyFandomsPage':
+        return MaterialPageRoute(
+          builder: (_) => MyFandomsPage(),
+        );
+
+      case '/RecommendationPage':
+        return MaterialPageRoute(
+          builder: (_) => RecommendationPage(),
         );
 
       case '/NewsMorePage':

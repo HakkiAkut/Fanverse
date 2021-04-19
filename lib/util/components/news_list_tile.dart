@@ -3,7 +3,6 @@ import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
-import 'package:fandom_app/view/news_more.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

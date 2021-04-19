@@ -1,11 +1,7 @@
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
-import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/news_list_tile.dart';
-import 'package:fandom_app/util/components/text_style.dart';
-import 'package:fandom_app/util/components/toast_message.dart';
 import 'package:fandom_app/view/tab_layout.dart';
-import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,4 +1,3 @@
-import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/text_style.dart';
@@ -99,7 +98,6 @@ class _SignUpPageState extends State<SignUpPage> {
             key2.currentState.save();
             key3.currentState.save();
             try {
-              AppUser appUser =
               await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd);
             } catch(e){
               errorMessage(message: "Sign up could not made!\n${e.toString()}",durationShort: false);

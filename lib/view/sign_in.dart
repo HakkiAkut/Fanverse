@@ -1,4 +1,3 @@
-import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/util/components/input_decoration.dart';
 import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
@@ -6,7 +5,6 @@ import 'package:fandom_app/util/components/toast_message.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
-import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +89,8 @@ class _SignInPageState extends State<SignInPage> {
   GestureDetector _buildSignUpNowButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,arguments: false);
+        Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,
+            arguments: false);
       },
       child: Container(
         padding: EdgeInsets.all(5.0),
@@ -117,9 +116,8 @@ class _SignInPageState extends State<SignInPage> {
     return GestureDetector(
       onTap: () async {
         //errorMessage(message: "Currently on progress!\nPlease login with email!",durationShort: true);
-        AppUser appUser;
         try {
-          appUser = await _appUserVM.signInWithGoogle();
+          await _appUserVM.signInWithGoogle();
         } catch (e) {
           errorMessage(
               message: "Sign in could not be made\n ${e.toString()}",
@@ -151,10 +149,9 @@ class _SignInPageState extends State<SignInPage> {
           if (key1.currentState.validate() && key2.currentState.validate()) {
             key1.currentState.save();
             key2.currentState.save();
-            AppUser appUser;
+
             try {
-              appUser =
-                  await _appUserVM.signInWithEmail(email: _email, pwd: _pwd);
+              await _appUserVM.signInWithEmail(email: _email, pwd: _pwd);
             } catch (e) {
               errorMessage(
                   message: "Sign in could not be made\n ${e.toString()}",

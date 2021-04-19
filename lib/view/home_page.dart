@@ -4,6 +4,7 @@ import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/news_list_tile.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/components/toast_message.dart';
+import 'package:fandom_app/view/tab_layout.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _scaffoldKey,
+      drawer: TabLayout.buildDrawer(context: context),
       appBar: AppBar(
         title: Text("Home Page"),
         actions: [

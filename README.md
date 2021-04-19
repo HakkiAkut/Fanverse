@@ -18,6 +18,13 @@ Repository(Model): controls which serivce is used, with this if we decide to cha
 
 Service(Model):Does back-end operations and returns needed data.
 
+## Progress
+Week 1: Sign in, Sign up and Home Page added. Firebase authentication is added. Sign in and sign up with email is added
+
+Week 2: Customized list view added to Home Page and fetched data from Firebase Firestore dynamically. Sign in with google added.
+
+Week 3: Drawer(Tab Layout) is added, on generate route is initialized.
+
 ## Authentication
 
 Activity Diagram

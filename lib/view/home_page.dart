@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _appUserVM = Provider.of<AppUserVM>(context);
     final _newsVM = Provider.of<List<News>>(context);
 
     return Scaffold(
@@ -31,24 +30,6 @@ class _HomePageState extends State<HomePage> {
       drawer: TabLayout.buildDrawer(context: context),
       appBar: AppBar(
         title: Text("Home Page"),
-        actions: [
-          ElevatedButton(
-            style: buttonStyle,
-            child: Text(
-              "Log out",
-              style: labelText,
-            ),
-            onPressed: () async {
-              bool signOut = await _appUserVM.signOut();
-              if (!signOut) {
-                errorMessage(
-                    message:
-                        "Your log out could not be made!\nPlease try again!",
-                    durationShort: true);
-              }
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Center(

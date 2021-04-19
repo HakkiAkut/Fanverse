@@ -1,6 +1,8 @@
 import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/util/constants/palette.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabLayout {
   static Drawer buildDrawer({@required BuildContext context}) {
@@ -66,6 +68,13 @@ class TabLayout {
             icon2: Icons.arrow_right,
             navigation: NavigationConstants.RECOMMENDATION,
           ),
+          _customListTile(
+            context: context,
+            icon1: Icons.backspace,
+            text: "Sign Out",
+            icon2: null,
+            navigation: NavigationConstants.SIGN_OUT,
+          ),
         ],
       ),
     );
@@ -74,10 +83,11 @@ class TabLayout {
   /// menüdeki itemleri oluşturan metod
   static Container _customListTile(
       {@required BuildContext context,
-        @required IconData icon1,
-        @required String text,
-        @required IconData icon2,
-        @required String navigation}) {
+      @required IconData icon1,
+      @required String text,
+      @required IconData icon2,
+      @required String navigation}) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -115,6 +125,9 @@ class TabLayout {
               break;
             case NavigationConstants.RECOMMENDATION:
               Navigator.pushNamed(context, NavigationConstants.RECOMMENDATION);
+              break;
+            case NavigationConstants.SIGN_OUT:
+              _appUserVM.signOut();
               break;
           }
         },

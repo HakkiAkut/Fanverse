@@ -45,6 +45,27 @@ class TabLayout {
             icon2: Icons.arrow_right,
             navigation: NavigationConstants.PROFILE,
           ),
+          _customListTile(
+            context: context,
+            icon1: Icons.list_alt_sharp,
+            text: "Fandoms",
+            icon2: Icons.arrow_right,
+            navigation: NavigationConstants.FANDOMS,
+          ),
+          _customListTile(
+            context: context,
+            icon1: Icons.my_library_books_sharp,
+            text: "My Fandoms",
+            icon2: Icons.arrow_right,
+            navigation: NavigationConstants.MY_FANDOMS,
+          ),
+          _customListTile(
+            context: context,
+            icon1: Icons.recommend,
+            text: "Recommendation",
+            icon2: Icons.arrow_right,
+            navigation: NavigationConstants.RECOMMENDATION,
+          ),
         ],
       ),
     );
@@ -85,6 +106,15 @@ class TabLayout {
               break;
             case NavigationConstants.PROFILE:
               Navigator.pushNamed(context, NavigationConstants.PROFILE);
+              break;
+            case NavigationConstants.FANDOMS:
+              Navigator.pushNamed(context, NavigationConstants.FANDOMS);
+              break;
+            case NavigationConstants.MY_FANDOMS:
+              Navigator.pushNamed(context, NavigationConstants.MY_FANDOMS);
+              break;
+            case NavigationConstants.RECOMMENDATION:
+              Navigator.pushNamed(context, NavigationConstants.RECOMMENDATION);
               break;
           }
         },

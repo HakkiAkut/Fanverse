@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/repositories/repository.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';
+import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:fandom_app/util/constants/app_state_enum.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 
-class AppUserVM with ChangeNotifier implements AuthMethods {
+class AppUserVM with ChangeNotifier implements AuthMethods, UserMethods {
   AppState _state = AppState.IDLE;
 
   Repository _repository = serviceLocator<Repository>();
@@ -62,10 +64,12 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
   }
 
   @override
-  Future<AppUser> signUpWithEmail({String email, String pwd}) async {
+  Future<AppUser> signUpWithEmail({String email, String pwd, String username}) async {
     try {
       state = AppState.BUSY;
-      _appUser = await _repository.signUpWithEmail(email: email, pwd: pwd);
+      _appUser = await _repository.signUpWithEmail(email: email, pwd: pwd, username: username);
+      _appUser.username=username;
+      _appUser.registrationDate= FieldValue.serverTimestamp() as Timestamp;
       return _appUser;
     } finally {
       state = AppState.IDLE;
@@ -81,5 +85,15 @@ class AppUserVM with ChangeNotifier implements AuthMethods {
     } finally {
       state = AppState.IDLE;
     }
+  }
+
+  @override
+  Future<AppUser> getUser({@required String uid}) async {
+    return await _repository.getUser(uid: uid);
+  }
+
+  @override
+  Future<bool> setUser({@required AppUser appUser}) async {
+    return await _repository.setUser(appUser: appUser);
   }
 }

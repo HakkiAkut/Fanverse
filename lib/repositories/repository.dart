@@ -25,7 +25,9 @@ class Repository implements AuthMethods, NewsMethods, UserMethods {
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.currentUser();
       if (appUser != null) {
-        return appUser;
+        return await _firestore.getUser(uid:appUser.uid);
+      } else {
+        return null;
       }
     }
     return null;
@@ -52,7 +54,7 @@ class Repository implements AuthMethods, NewsMethods, UserMethods {
   }
 
   @override
-  Future<AppUser> signUpWithEmail({String email, String pwd}) async {
+  Future<AppUser> signUpWithEmail({String email, String pwd,String username}) async {
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.signUpWithEmail(email: email, pwd: pwd);
       if (appUser != null) {

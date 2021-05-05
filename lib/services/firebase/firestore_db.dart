@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
+import 'package:fandom_app/services/base/database/db_user_methods.dart';
+import 'package:flutter/material.dart';
 
-class FirestoreDB implements NewsMethods {
+class FirestoreDB implements NewsMethods, UserMethods{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
-  
 
   @override
   Stream<List<News>> getNews({int limit}) {
@@ -21,14 +21,31 @@ class FirestoreDB implements NewsMethods {
   }
 
   @override
-  Future<AppUser> getUser(String userId) {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<AppUser> getUser({@required String uid}) async {
+    try {
+      DocumentSnapshot user =
+          await _firestore.collection("users").doc(uid).get();
+      Map<String, dynamic> userData = user.data();
+      AppUser newUser = AppUser.fromMap(userData);
+      print("user object: " + newUser.uid);
+      return newUser;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 
   @override
-  Future<bool> saveUser(AppUser appUser) {
-    // TODO: implement saveUser
-    throw UnimplementedError();
+  Future<bool> setUser({@required AppUser appUser}) async {
+    try {
+      await _firestore
+          .collection("users")
+          .doc(appUser.uid)
+          .set(appUser.toMap());
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
   }
 }

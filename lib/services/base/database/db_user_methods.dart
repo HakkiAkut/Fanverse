@@ -1,6 +1,7 @@
 import 'package:fandom_app/models/app_user.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class UserMethods {
-  Future<bool> saveUser(AppUser appUser);
-  Future<AppUser> getUser(String userId);
+  Future<bool> setUser({@required AppUser appUser});
+  Future<AppUser> getUser({@required String uid});
 }

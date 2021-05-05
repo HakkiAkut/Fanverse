@@ -58,6 +58,8 @@ class Repository implements AuthMethods, NewsMethods, UserMethods {
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.signUpWithEmail(email: email, pwd: pwd);
       if (appUser != null) {
+        appUser.username=username;
+        await setUser(appUser: appUser);
         return appUser;
       }
     }

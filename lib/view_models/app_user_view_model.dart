@@ -68,8 +68,6 @@ class AppUserVM with ChangeNotifier implements AuthMethods, UserMethods {
     try {
       state = AppState.BUSY;
       _appUser = await _repository.signUpWithEmail(email: email, pwd: pwd, username: username);
-      _appUser.username=username;
-      _appUser.registrationDate= FieldValue.serverTimestamp() as Timestamp;
       return _appUser;
     } finally {
       state = AppState.IDLE;

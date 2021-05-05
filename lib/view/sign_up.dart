@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
             key2.currentState.save();
             key3.currentState.save();
             try {
-              await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd);
+              await _appUserVM.signUpWithEmail(email: _email, pwd: _pwd,username: _username);
             } catch(e){
               errorMessage(message: "Sign up could not made!\n${e.toString()}",durationShort: false);
             }

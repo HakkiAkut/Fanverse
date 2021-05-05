@@ -1,7 +1,7 @@
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';
-import 'package:fandom_app/services/base/database_methods.dart';
+import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/services/firebase/auth.dart';
 import 'package:fandom_app/services/firebase/firestore_db.dart';
 import 'package:fandom_app/util/constants/database__service_enum.dart';
@@ -12,7 +12,7 @@ import 'package:fandom_app/util/init/service_locator.dart';
 /// If WebService is FIREBASE then it will work with firebase methods
 /// otherwise if there is another service it will work with other one.
 /// Works like DAO manager basically.
-class Repository implements AuthMethods, DatabaseMethods {
+class Repository implements AuthMethods, NewsMethods {
   Auth _auth = serviceLocator<Auth>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
   WebService _webService = WebService.FIREBASE;
@@ -77,5 +77,17 @@ class Repository implements AuthMethods, DatabaseMethods {
       return _firestore.getNews(limit: limit);
     }
     return null;
+  }
+
+  @override
+  Future<AppUser> getUser(String userId) {
+    // TODO: implement getUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> saveUser(AppUser appUser) {
+    // TODO: implement saveUser
+    throw UnimplementedError();
   }
 }

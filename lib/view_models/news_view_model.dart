@@ -1,11 +1,11 @@
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/repositories/repository.dart';
-import 'package:fandom_app/services/base/database_methods.dart';
+import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/util/constants/app_state_enum.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:flutter/material.dart';
 
-class NewsVM with ChangeNotifier implements DatabaseMethods {
+class NewsVM with ChangeNotifier implements NewsMethods {
   AppState _state = AppState.IDLE;
   Repository _repository = serviceLocator<Repository>();
   int limit =10;

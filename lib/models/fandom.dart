@@ -4,8 +4,8 @@ class Fandom {
   String fid; // fandom id
   String name; // fandom name
   String description;
-  List<String> members; // user id of members
-  List<String> admins;
+  List<dynamic> members; // user id of members
+  List<dynamic> admins;
   List<SubClasses> classes; // general titles like Kingdoms, Characters
   String imageUrl;
 
@@ -34,8 +34,8 @@ class Fandom {
       fid: map["fid"] as String,
       name: map["name"] as String,
       description: map["description"] as String,
-      members: map["members"] as List<String>,
-      admins: map["admins"] as List<String>,
+      members: map["members"],
+      admins: map["admins"],
       imageUrl: map["image"] as String,
     );
   }

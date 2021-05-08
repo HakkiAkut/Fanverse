@@ -21,6 +21,7 @@ class FandomVM with ChangeNotifier implements FandomMethods{
 
   FandomVM(){
    getFandom();
+   print("works 1");
   }
 
   set state(AppState value) {

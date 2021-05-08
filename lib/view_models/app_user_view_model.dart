@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/repositories/repository.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';

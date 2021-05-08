@@ -1,19 +1,22 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/app_user.dart';
+import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:flutter/material.dart';
 
-class FirestoreDB implements NewsMethods, UserMethods{
+class FirestoreDB implements NewsMethods, UserMethods, FandomMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Stream<List<News>> getNews({int limit}) {
     Stream<QuerySnapshot> qp = _firestore
         .collection('news')
-        .orderBy('milisecond', descending: true).limit(10)
+        .orderBy('milisecond', descending: true)
+        .limit(10)
         .snapshots();
 
     return qp.map(
@@ -47,5 +50,11 @@ class FirestoreDB implements NewsMethods, UserMethods{
       print(e.toString());
       return false;
     }
+  }
+
+  @override
+  Future<List<Fandom>> getFandom() async {
+    QuerySnapshot qp = await _firestore.collection("Fandom").get();
+    return qp.docs.map((doc) => Fandom.fromMap(doc.data())).toList();
   }
 }

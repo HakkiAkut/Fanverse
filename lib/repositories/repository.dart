@@ -1,6 +1,8 @@
 import 'package:fandom_app/models/app_user.dart';
+import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';
+import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:fandom_app/services/firebase/auth.dart';
@@ -14,7 +16,7 @@ import 'package:flutter/material.dart';
 /// If WebService is FIREBASE then it will work with firebase methods
 /// otherwise if there is another service it will work with other one.
 /// Works like DAO manager basically.
-class Repository implements AuthMethods, NewsMethods, UserMethods {
+class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods {
   Auth _auth = serviceLocator<Auth>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
   WebService _webService = WebService.FIREBASE;
@@ -86,17 +88,25 @@ class Repository implements AuthMethods, NewsMethods, UserMethods {
   }
 
   @override
-  Future<AppUser> getUser({@required String uid}) {
+  Future<AppUser> getUser({@required String uid}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return _firestore.getUser(uid: uid);
+      return await _firestore.getUser(uid: uid);
     }
     return null;
   }
 
   @override
-  Future<bool> setUser({@required AppUser appUser}) {
+  Future<bool> setUser({@required AppUser appUser}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return _firestore.setUser(appUser: appUser);
+      return await _firestore.setUser(appUser: appUser);
+    }
+    return null;
+  }
+
+  @override
+  Future<List<Fandom>> getFandom() async {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return await _firestore.getFandom();
     }
     return null;
   }

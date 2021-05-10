@@ -4,14 +4,16 @@ import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/services/base/database/db_announcements_methods.dart';
 import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
+import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:flutter/material.dart';
 
 class FirestoreDB
-    implements NewsMethods, UserMethods, FandomMethods, AnnouncementsMethods {
+    implements NewsMethods, UserMethods, FandomMethods, AnnouncementsMethods, PostsMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -72,5 +74,17 @@ class FirestoreDB
 
     return qp.map((docs) =>
         docs.docs.map((doc) => Announcements.fromMap(doc.data())).toList());
+  }
+
+  @override
+  Stream<List<Posts>> getPostsByFID({@required int fid}) {
+    Stream<QuerySnapshot> qp = _firestore
+        .collection('posts')
+        .where("fid", isEqualTo: fid)
+        .orderBy('milisecond', descending: true)
+        .snapshots();
+
+    return qp.map((docs) =>
+    docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
   }
 }

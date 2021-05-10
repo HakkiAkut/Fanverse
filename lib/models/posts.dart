@@ -20,5 +20,4 @@ class Posts {
       fid: map['fid'] as String,
     );
   }
-
 }

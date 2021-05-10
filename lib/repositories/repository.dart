@@ -2,10 +2,12 @@ import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';
 import 'package:fandom_app/services/base/database/db_announcements_methods.dart';
 import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
+import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:fandom_app/services/firebase/auth.dart';
 import 'package:fandom_app/services/firebase/firestore_db.dart';
@@ -18,7 +20,14 @@ import 'package:flutter/material.dart';
 /// If WebService is FIREBASE then it will work with firebase methods
 /// otherwise if there is another service it will work with other one.
 /// Works like DAO manager basically.
-class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods, AnnouncementsMethods {
+class Repository
+    implements
+        AuthMethods,
+        NewsMethods,
+        UserMethods,
+        FandomMethods,
+        AnnouncementsMethods,
+        PostsMethods {
   Auth _auth = serviceLocator<Auth>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
   WebService _webService = WebService.FIREBASE;
@@ -29,7 +38,7 @@ class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.currentUser();
       if (appUser != null) {
-        return await _firestore.getUser(uid:appUser.uid);
+        return await _firestore.getUser(uid: appUser.uid);
       } else {
         return null;
       }
@@ -58,11 +67,12 @@ class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods
   }
 
   @override
-  Future<AppUser> signUpWithEmail({String email, String pwd,String username}) async {
+  Future<AppUser> signUpWithEmail(
+      {String email, String pwd, String username}) async {
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.signUpWithEmail(email: email, pwd: pwd);
       if (appUser != null) {
-        appUser.username=username;
+        appUser.username = username;
         await setUser(appUser: appUser);
         return appUser;
       }
@@ -116,7 +126,15 @@ class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods
   @override
   Stream<List<Announcements>> getAnnouncements({int limit, String fid}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return  _firestore.getAnnouncements(limit: limit, fid: fid);
+      return _firestore.getAnnouncements(limit: limit, fid: fid);
+    }
+    return null;
+  }
+
+  @override
+  Stream<List<Posts>> getPostsByFID({@required int fid}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return _firestore.getPostsByFID(fid: fid);
     }
     return null;
   }

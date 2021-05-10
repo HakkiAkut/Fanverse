@@ -1,9 +1,13 @@
+import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/palette.dart';
+import 'package:fandom_app/view/fandom/fandom_announcements.dart';
+import 'package:fandom_app/view_models/fandom_more_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FandomMore extends StatefulWidget {
   final Fandom fandom;
@@ -39,7 +43,7 @@ class _FandomMoreState extends State<FandomMore> {
               ),
             ),
           ),
-          fandomTabs()[_current],
+          fandomTabs(context)[_current],
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -59,12 +63,24 @@ class _FandomMoreState extends State<FandomMore> {
     );
   }
 
-  List<SliverToBoxAdapter> fandomTabs() {
+  List<Widget> fandomTabs(BuildContext context) {
     return [
       SliverToBoxAdapter(
         child: Container(
           padding: EdgeInsets.all(10),
-          child: Text(widget.fandom.description),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(widget.fandom.description),
+              StreamProvider<List<Announcements>>.value(
+                value: FandomMoreVM().getAnnouncements(),
+                initialData: [],
+                child: FandomAnnouncements(),
+                updateShouldNotify: (prev,now)=>true,
+              ),
+            ],
+          ),
         ),
       ),
       SliverToBoxAdapter(

@@ -149,7 +149,6 @@ class _SignInPageState extends State<SignInPage> {
           if (key1.currentState.validate() && key2.currentState.validate()) {
             key1.currentState.save();
             key2.currentState.save();
-
             try {
               await _appUserVM.signInWithEmail(email: _email, pwd: _pwd);
             } catch (e) {

@@ -1,6 +1,6 @@
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
-import 'package:fandom_app/view/fandom_more.dart';
+import 'package:fandom_app/view/fandom/fandom_more.dart';
 import 'package:fandom_app/view/fandoms.dart';
 import 'package:fandom_app/view/home_page.dart';
 import 'package:fandom_app/view/my_fandoms.dart';
@@ -68,7 +68,6 @@ class RouteGenerator {
       case '/FandomMore':
         if (args is Fandom) {
           return MaterialPageRoute(
-            fullscreenDialog: true,
             builder: (_) => FandomMore(
               fandom: args,
             ),

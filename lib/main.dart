@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => FandomVM(),
         ),
+
       ],
 
       child: MaterialApp(

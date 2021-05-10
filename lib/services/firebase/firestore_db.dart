@@ -77,7 +77,7 @@ class FirestoreDB
   }
 
   @override
-  Stream<List<Posts>> getPostsByFID({@required int fid}) {
+  Stream<List<Posts>> getPostsByFID({@required String fid}) {
     Stream<QuerySnapshot> qp = _firestore
         .collection('posts')
         .where("fid", isEqualTo: fid)

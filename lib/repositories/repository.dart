@@ -132,7 +132,7 @@ class Repository
   }
 
   @override
-  Stream<List<Posts>> getPostsByFID({@required int fid}) {
+  Stream<List<Posts>> getPostsByFID({@required String fid}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
       return _firestore.getPostsByFID(fid: fid);
     }

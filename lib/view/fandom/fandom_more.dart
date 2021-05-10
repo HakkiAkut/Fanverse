@@ -1,9 +1,11 @@
 import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/fandom.dart';
+import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/view/fandom/fandom_announcements.dart';
+import 'package:fandom_app/view/fandom/fandom_posts.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -77,14 +79,19 @@ class _FandomMoreState extends State<FandomMore> {
                 value: FandomMoreVM().getAnnouncements(fid: widget.fandom.fid),
                 initialData: [],
                 child: FandomAnnouncements(),
-                updateShouldNotify: (prev,now)=>true,
+                updateShouldNotify: (prev, now) => true,
               ),
             ],
           ),
         ),
       ),
       SliverToBoxAdapter(
-        child: Text("second"),
+        child: StreamProvider<List<Posts>>.value(
+          value: FandomMoreVM().getPostsByFID(fid: widget.fandom.fid),
+          initialData: [],
+          child: FandomPosts(),
+          updateShouldNotify: (prev, now) => true,
+        ),
       ),
     ];
   }

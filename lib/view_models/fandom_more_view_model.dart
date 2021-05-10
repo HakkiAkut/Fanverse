@@ -27,7 +27,7 @@ class FandomMoreVM with ChangeNotifier implements AnnouncementsMethods, PostsMet
   }
 
   @override
-  Stream<List<Posts>> getPostsByFID({@required int fid}) {
+  Stream<List<Posts>> getPostsByFID({@required String fid}) {
     return _repository.getPostsByFID(fid: fid);
   }
 }

@@ -1,4 +1,4 @@
-import 'package:fandom_app/util/components/fandoms_list_tile.dart';
+import 'package:fandom_app/util/components/list_tiles/fandoms_list_tile.dart';
 import 'package:fandom_app/util/constants/app_state_enum.dart';
 import 'package:fandom_app/view_models/fandom_view_model.dart';
 import 'package:flutter/material.dart';

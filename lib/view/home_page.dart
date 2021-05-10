@@ -1,6 +1,6 @@
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
-import 'package:fandom_app/util/components/news_list_tile.dart';
+import 'package:fandom_app/util/components/list_tiles/news_list_tile.dart';
 import 'package:fandom_app/view/tab_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

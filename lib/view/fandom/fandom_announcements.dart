@@ -1,4 +1,5 @@
 import 'package:fandom_app/models/announcements.dart';
+import 'package:fandom_app/util/components/list_tiles/announcement_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _FandomAnnouncementsState extends State<FandomAnnouncements> {
         primary: false,
         itemBuilder: (context, index) {
           print("${_fandomMoreVM[index].title}");
-          return Text("title: ${_fandomMoreVM[index].title}");
+          return announcementListTile(context: context, announcements: _fandomMoreVM[index]);
         },
         scrollDirection: Axis.vertical,
         shrinkWrap: true,

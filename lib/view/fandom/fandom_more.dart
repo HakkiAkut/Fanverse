@@ -74,7 +74,7 @@ class _FandomMoreState extends State<FandomMore> {
             children: [
               Text(widget.fandom.description),
               StreamProvider<List<Announcements>>.value(
-                value: FandomMoreVM().getAnnouncements(),
+                value: FandomMoreVM().getAnnouncements(fid: widget.fandom.fid),
                 initialData: [],
                 child: FandomAnnouncements(),
                 updateShouldNotify: (prev,now)=>true,

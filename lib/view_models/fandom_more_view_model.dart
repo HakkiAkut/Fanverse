@@ -19,8 +19,8 @@ class FandomMoreVM with ChangeNotifier implements AnnouncementsMethods {
 
 
   @override
-  Stream<List<Announcements>> getAnnouncements({int limit}) {
+  Stream<List<Announcements>> getAnnouncements({int limit, String fid}) {
     print("announcements");
-    return _repository.getAnnouncements(limit: lim);
+    return _repository.getAnnouncements(limit: lim,fid: fid);
   }
 }

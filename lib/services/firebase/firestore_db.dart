@@ -62,14 +62,15 @@ class FirestoreDB
   }
 
   @override
-  Stream<List<Announcements>> getAnnouncements({int limit}) {
+  Stream<List<Announcements>> getAnnouncements({int limit, String fid}) {
     Stream<QuerySnapshot> qp = _firestore
         .collection('announcements')
+        .where("fid", isEqualTo: fid)
         .orderBy('milisecond', descending: true)
         .limit(limit)
         .snapshots();
 
-    return qp.map(
-            (docs) => docs.docs.map((doc) => Announcements.fromMap(doc.data())).toList());
+    return qp.map((docs) =>
+        docs.docs.map((doc) => Announcements.fromMap(doc.data())).toList());
   }
 }

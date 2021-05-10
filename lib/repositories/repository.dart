@@ -114,9 +114,9 @@ class Repository implements AuthMethods, NewsMethods, UserMethods, FandomMethods
   }
 
   @override
-  Stream<List<Announcements>> getAnnouncements({int limit}) {
+  Stream<List<Announcements>> getAnnouncements({int limit, String fid}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return  _firestore.getAnnouncements(limit: limit);
+      return  _firestore.getAnnouncements(limit: limit, fid: fid);
     }
     return null;
   }

@@ -21,7 +21,6 @@ class Posts {
       "text": text,
       "date": date ?? FieldValue.serverTimestamp(),
       "imageUrl": imageUrl,
-      "milisecond": DateTime.now().toUtc().millisecond,
     };
   }
 

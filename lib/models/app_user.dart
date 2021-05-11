@@ -4,7 +4,7 @@ class AppUser{
   String uid;
   String username;
   String email;
-  DateTime registrationDate;
+  Timestamp registrationDate;
 
 
   AppUser({this.uid, this.username, this.email,this.registrationDate});
@@ -19,10 +19,10 @@ class AppUser{
   }
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      uid: map['uid'] as String,
+      uid: map['userId'] as String,
       username: map['username'] as String,
       email: map['email'] as String,
-      registrationDate: (map['registrationDate'] as Timestamp).toDate(),
+      registrationDate: map['registrationDate'] as Timestamp,
     );
   }
 }

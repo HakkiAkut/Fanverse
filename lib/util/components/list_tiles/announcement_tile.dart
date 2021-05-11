@@ -5,8 +5,8 @@ import 'package:fandom_app/util/constants/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Container announcementListTile({@required BuildContext context, @required Announcements announcements}) {
-
+Container announcementListTile(
+    {@required BuildContext context, @required Announcements announcements}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
@@ -22,23 +22,25 @@ Container announcementListTile({@required BuildContext context, @required Announ
     ),
     child: Column(
       children: [
-        Container(
-          height: DynamicSize.dynamicWidth(context, 0.50),
-          decoration: BoxDecoration(
-            color: Palette.MAIN_COLOR.shade200,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 20,
-                offset: Offset(0, 10),
-              ),
-            ],
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(announcements.imageUrl),
-            ),
-          ),
-        ),
+        announcements.imageUrl != null
+            ? Container(
+                height: DynamicSize.dynamicWidth(context, 0.50),
+                decoration: BoxDecoration(
+                  color: Palette.MAIN_COLOR.shade200,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 20,
+                      offset: Offset(0, 10),
+                    ),
+                  ],
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(announcements.imageUrl),
+                  ),
+                ),
+              )
+            : Container(),
         SizedBox(
           height: 8.0,
         ),
@@ -52,10 +54,8 @@ Container announcementListTile({@required BuildContext context, @required Announ
             ),
             Text(
               DateFormat.yMMMd().format(announcements.date.toDate()),
-              style: labelText.copyWith(
-                  color: Colors.black.withOpacity(0.8)),
+              style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
             )
-
           ],
         ),
         SizedBox(

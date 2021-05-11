@@ -21,7 +21,7 @@ class Posts {
       "uid": uid,
       "text": text,
       "date": date ?? FieldValue.serverTimestamp(),
-      "imageUrl": imageUrl,
+      "url": imageUrl,
     };
   }
 

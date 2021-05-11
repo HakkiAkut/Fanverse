@@ -117,4 +117,16 @@ class FirestoreDB
     }
 
   }
+
+  @override
+  Stream<List<Posts>> getPostsByUID({String uid}) {
+    Stream<QuerySnapshot> qp = _firestore
+        .collection('posts')
+        .where("uid", isEqualTo: uid)
+        .orderBy('date', descending: true)
+        .snapshots();
+
+    return qp.map((docs) =>
+        docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+  }
 }

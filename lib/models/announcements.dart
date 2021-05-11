@@ -19,7 +19,7 @@ class Announcements {
       "fid": fid,
       "text": text,
       "date": date ?? FieldValue.serverTimestamp(),
-      "imageUrl": imageUrl,
+      "url": imageUrl,
     };
   }
 

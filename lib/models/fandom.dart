@@ -4,8 +4,8 @@ class Fandom {
   String fid; // fandom id
   String name; // fandom name
   String description;
-  List<dynamic> members; // user id of members
-  List<dynamic> admins;
+  Map<String, dynamic> members; // user id of members
+  Map<String, dynamic> admins;
   List<SubClasses> classes; // general titles like Kingdoms, Characters
   String imageUrl;
 

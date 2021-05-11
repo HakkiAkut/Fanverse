@@ -47,8 +47,9 @@ class FandomMoreVM
   @override
   Future<bool> setAnnouncement({Announcements announcements}) async {
     if (announcements.imageUrl != "") {
-      announcements.imageUrl =
-          await uploadFile(uid: "${announcements.fid}_Announcement", uploadedFile: File(announcements.imageUrl));
+      announcements.imageUrl = await uploadFile(
+          uid: "${announcements.fid}_Announcement",
+          uploadedFile: File(announcements.imageUrl));
     }
     return _repository.setAnnouncement(announcements: announcements);
   }
@@ -56,5 +57,10 @@ class FandomMoreVM
   @override
   Future<String> uploadFile({String uid, File uploadedFile}) {
     return _repository.uploadFile(uid: uid, uploadedFile: uploadedFile);
+  }
+
+  @override
+  Stream<List<Posts>> getPostsByUID({@required String uid}) {
+    return _repository.getPostsByUID(uid: uid);
   }
 }

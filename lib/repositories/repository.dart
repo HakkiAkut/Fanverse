@@ -171,4 +171,12 @@ class Repository
     }
     return null;
   }
+
+  @override
+  Stream<List<Posts>> getPostsByUID({String uid}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return _firestore.getPostsByUID(uid: uid);
+    }
+    return null;
+  }
 }

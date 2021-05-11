@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'file:///D:/repo/fandom_app/fandom_app/lib/util/methods/random_string_generator.dart';
+import 'package:fandom_app/util/methods/random_generator.dart';
+
 
 class Posts {
   String id;
@@ -14,7 +15,7 @@ class Posts {
 
   Map<String,dynamic> toMap(){
     return{
-      "id": id ?? RandomStringGenerator().getRandomString(5),
+      "id": id ?? RandomGenerator().getRandomString(5),
       "username": username,
       "fid": fid,
       "uid": uid,

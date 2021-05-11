@@ -26,7 +26,7 @@ class AppUser{
       username: map['username'] as String,
       email: map['email'] as String,
       image: map['image'] as String,
-      registrationDate: map['registrationDate'] as Timestamp,
+      registrationDate: map['registration_date'] as Timestamp,
     );
   }
 }

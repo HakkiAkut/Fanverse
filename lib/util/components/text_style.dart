@@ -19,3 +19,10 @@ final normalText = TextStyle(
   fontWeight: FontWeight.bold,
   color: Color(0xFF221145),
 );
+
+final profileText = TextStyle(
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+  fontFamily: 'OpenSans',
+  fontSize: 24,
+);

@@ -8,4 +8,5 @@ class NavigationConstants {
   static const RECOMMENDATION = "/RecommendationPage";
   static const SIGN_OUT = "/RootPage";
   static const FANDOM_MORE = "/FandomMore";
+  static const RECENT_ACTIVITIES ="/RecentActivities";
 }

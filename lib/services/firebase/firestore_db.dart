@@ -68,7 +68,7 @@ class FirestoreDB
     Stream<QuerySnapshot> qp = _firestore
         .collection('announcements')
         .where("fid", isEqualTo: fid)
-        .orderBy('milisecond', descending: true)
+        .orderBy('date', descending: true)
         .limit(limit)
         .snapshots();
 

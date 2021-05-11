@@ -8,6 +8,7 @@ import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/view/fandom/fandom_announcements.dart';
 import 'package:fandom_app/view/fandom/fandom_posts.dart';
+import 'package:fandom_app/view/fandom/send_announcement.dart';
 import 'package:fandom_app/view/fandom/send_post.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';
@@ -50,7 +51,33 @@ class _FandomMoreState extends State<FandomMore> {
               ),
             ),
           ),
-          fandomTabs(context, _appUserVM.appUser)[_current],
+          fandomTabs(context)[_current],
+        ],
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <FloatingActionButton>[
+          _current == 0
+              ? FloatingActionButton(
+                  mini: true,
+                  onPressed: () {
+                    SendAnnouncement().dialog(
+                      context: context,
+                      fandom: widget.fandom,
+                    );
+                  },
+                  child: Icon(Icons.add),
+                )
+              : FloatingActionButton(
+                  mini: true,
+                  onPressed: () {
+                    SendPost().dialog(
+                        context: context,
+                        fandom: widget.fandom,
+                        appUser: _appUserVM.appUser);
+                  },
+                  child: Icon(Icons.add),
+                )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -70,7 +97,7 @@ class _FandomMoreState extends State<FandomMore> {
     );
   }
 
-  List<Widget> fandomTabs(BuildContext context, AppUser appUser) {
+  List<Widget> fandomTabs(BuildContext context) {
     return [
       SliverToBoxAdapter(
         child: Container(
@@ -91,28 +118,11 @@ class _FandomMoreState extends State<FandomMore> {
         ),
       ),
       SliverToBoxAdapter(
-        child: Column(
-          children: [
-            ElevatedButton(
-              style: buttonStyle,
-              onPressed: () {
-                SendPost().dialog(context: context,fandom: widget.fandom,appUser: appUser);
-              },
-              child: Text(
-                "Send Post",
-                style: labelText.copyWith(
-                  letterSpacing: 1.5,
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            StreamProvider<List<Posts>>.value(
-              value: FandomMoreVM().getPostsByFID(fid: widget.fandom.fid),
-              initialData: [],
-              child: FandomPosts(),
-              updateShouldNotify: (prev, now) => true,
-            )
-          ],
+        child: StreamProvider<List<Posts>>.value(
+          value: FandomMoreVM().getPostsByFID(fid: widget.fandom.fid),
+          initialData: [],
+          child: FandomPosts(),
+          updateShouldNotify: (prev, now) => true,
         ),
       ),
     ];

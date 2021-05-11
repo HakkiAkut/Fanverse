@@ -28,6 +28,5 @@ class _FandomPostsState extends State<FandomPosts> {
           );
         },
         itemCount: _fandomMoreVM.length);
-
   }
 }

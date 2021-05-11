@@ -45,7 +45,11 @@ class FandomMoreVM
   }
 
   @override
-  Future<bool> setAnnouncement({Announcements announcements}) {
+  Future<bool> setAnnouncement({Announcements announcements}) async {
+    if (announcements.imageUrl != "") {
+      announcements.imageUrl =
+          await uploadFile(uid: "${announcements.fid}_Announcement", uploadedFile: File(announcements.imageUrl));
+    }
     return _repository.setAnnouncement(announcements: announcements);
   }
 

@@ -3,4 +3,5 @@ import 'package:flutter/cupertino.dart';
 
 abstract class PostsMethods {
   Stream<List<Posts>> getPostsByFID({@required String fid});
+  Future<bool> setPost({@required Posts post});
 }

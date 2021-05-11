@@ -87,4 +87,34 @@ class FirestoreDB
     return qp.map((docs) =>
     docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
   }
+
+  @override
+  Future<bool> setPost({Posts post}) async {
+    try {
+      await _firestore
+          .collection("posts")
+          .doc(post.id)
+          .set(post.toMap());
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+
+  }
+
+  @override
+  Future<bool> setAnnouncement({Announcements announcements}) async {
+    try {
+      await _firestore
+          .collection("announcements")
+          .doc(announcements.id)
+          .set(announcements.toMap());
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+
+  }
 }

@@ -138,4 +138,20 @@ class Repository
     }
     return null;
   }
+
+  @override
+  Future<bool> setPost({Posts post}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return _firestore.setPost(post: post);
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> setAnnouncement({Announcements announcements}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return _firestore.setAnnouncement(announcements: announcements);
+    }
+    return null;
+  }
 }

@@ -19,15 +19,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(
-        create: (context) => AppUserVM(),
-      ),
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AppUserVM(),
+        ),
         ChangeNotifierProvider(
           create: (context) => FandomVM(),
         ),
-
       ],
-
       child: MaterialApp(
         title: 'Fandom App',
         debugShowCheckedModeBanner: false,

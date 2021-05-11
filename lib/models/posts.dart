@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fandom_app/util/constants/random_string_generator.dart';
 
 class Posts {
   String id;
@@ -10,6 +11,18 @@ class Posts {
   Timestamp date;
 
   Posts({this.id, this.username, this.fid, this.uid, this.text, this.imageUrl, this.date});
+
+  Map<String,dynamic> toMap(){
+    return{
+      "id": id ?? RandomStringGenerator().getRandomString(5),
+      "username": username,
+      "fid": fid,
+      "uid": uid,
+      "text": text,
+      "date": date ?? FieldValue.serverTimestamp(),
+      "imageUrl": imageUrl,
+    };
+  }
 
   factory Posts.fromMap(Map<String, dynamic> map) {
     return Posts(

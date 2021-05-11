@@ -36,7 +36,11 @@ class FandomMoreVM
   }
 
   @override
-  Future<bool> setPost({Posts post}) {
+  Future<bool> setPost({Posts post}) async {
+    if (post.imageUrl != "") {
+      post.imageUrl =
+          await uploadFile(uid: post.uid, uploadedFile: File(post.imageUrl));
+    }
     return _repository.setPost(post: post);
   }
 

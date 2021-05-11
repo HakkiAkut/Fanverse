@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/announcements.dart';
+import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/util/components/button_style.dart';
@@ -8,6 +8,8 @@ import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/view/fandom/fandom_announcements.dart';
 import 'package:fandom_app/view/fandom/fandom_posts.dart';
+import 'package:fandom_app/view/fandom/send_post.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,7 @@ class _FandomMoreState extends State<FandomMore> {
 
   @override
   Widget build(BuildContext context) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       body: CustomScrollView(
         primary: false,
@@ -47,7 +50,7 @@ class _FandomMoreState extends State<FandomMore> {
               ),
             ),
           ),
-          fandomTabs(context)[_current],
+          fandomTabs(context, _appUserVM.appUser)[_current],
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -67,7 +70,7 @@ class _FandomMoreState extends State<FandomMore> {
     );
   }
 
-  List<Widget> fandomTabs(BuildContext context) {
+  List<Widget> fandomTabs(BuildContext context, AppUser appUser) {
     return [
       SliverToBoxAdapter(
         child: Container(
@@ -93,10 +96,10 @@ class _FandomMoreState extends State<FandomMore> {
             ElevatedButton(
               style: buttonStyle,
               onPressed: () {
-                FandomMoreVM().setPost(post: new Posts(fid: "11111111111",username:"username",text: "Text ulan"));
+                SendPost().dialog(context: context,fandom: widget.fandom,appUser: appUser);
               },
               child: Text(
-                "Add Post",
+                "Send Post",
                 style: labelText.copyWith(
                   letterSpacing: 1.5,
                   fontSize: 20.0,

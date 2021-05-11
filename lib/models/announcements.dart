@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fandom_app/util/constants/random_string_generator.dart';
+import 'file:///D:/repo/fandom_app/fandom_app/lib/util/methods/random_string_generator.dart';
 
 class Announcements {
   String id;

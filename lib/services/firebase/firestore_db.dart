@@ -81,7 +81,7 @@ class FirestoreDB
     Stream<QuerySnapshot> qp = _firestore
         .collection('posts')
         .where("fid", isEqualTo: fid)
-        .orderBy('milisecond', descending: true)
+        .orderBy('date', descending: true)
         .snapshots();
 
     return qp.map((docs) =>

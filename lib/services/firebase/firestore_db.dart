@@ -13,7 +13,12 @@ import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:flutter/material.dart';
 
 class FirestoreDB
-    implements NewsMethods, UserMethods, FandomMethods, AnnouncementsMethods, PostsMethods {
+    implements
+        NewsMethods,
+        UserMethods,
+        FandomMethods,
+        AnnouncementsMethods,
+        PostsMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -58,9 +63,13 @@ class FirestoreDB
   }
 
   @override
-  Future<List<Fandom>> getFandom() async {
-    QuerySnapshot qp = await _firestore.collection("Fandom").get();
-    return qp.docs.map((doc) => Fandom.fromMap(doc.data())).toList();
+  Stream<List<Fandom>> getFandom()  {
+    Stream<QuerySnapshot> qp = _firestore
+        .collection('Fandom')
+        .snapshots();
+
+    return qp.map(
+            (docs) => docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
   }
 
   @override
@@ -84,23 +93,19 @@ class FirestoreDB
         .orderBy('date', descending: true)
         .snapshots();
 
-    return qp.map((docs) =>
-    docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+    return qp.map(
+        (docs) => docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
   }
 
   @override
   Future<bool> setPost({Posts post}) async {
     try {
-      await _firestore
-          .collection("posts")
-          .doc(post.id)
-          .set(post.toMap());
+      await _firestore.collection("posts").doc(post.id).set(post.toMap());
       return true;
     } catch (e) {
       print(e.toString());
       return false;
     }
-
   }
 
   @override
@@ -115,7 +120,6 @@ class FirestoreDB
       print(e.toString());
       return false;
     }
-
   }
 
   @override
@@ -126,7 +130,18 @@ class FirestoreDB
         .orderBy('date', descending: true)
         .snapshots();
 
-    return qp.map((docs) =>
-        docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+    return qp.map(
+        (docs) => docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+  }
+
+  @override
+  Stream<List<Fandom>> getFandomByUID({String uid}) {
+    Stream<QuerySnapshot> qp = _firestore
+        .collection('Fandom')
+        .where("members.$uid", isEqualTo: true)
+        .snapshots();
+
+    return qp.map(
+        (docs) => docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
   }
 }

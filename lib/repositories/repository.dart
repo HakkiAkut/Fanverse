@@ -125,9 +125,9 @@ class Repository
   }
 
   @override
-  Future<List<Fandom>> getFandom() async {
+  Stream<List<Fandom>> getFandom() {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return await _firestore.getFandom();
+      return _firestore.getFandom();
     }
     return null;
   }
@@ -176,6 +176,14 @@ class Repository
   Stream<List<Posts>> getPostsByUID({String uid}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
       return _firestore.getPostsByUID(uid: uid);
+    }
+    return null;
+  }
+
+  @override
+  Stream<List<Fandom>> getFandomByUID({String uid}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return  _firestore.getFandomByUID(uid: uid);
     }
     return null;
   }

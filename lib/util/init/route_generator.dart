@@ -1,9 +1,9 @@
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
-import 'package:fandom_app/view/fandom/fandom_more.dart';
-import 'package:fandom_app/view/fandoms.dart';
+import 'package:fandom_app/view/fandom/all_fandoms.dart';
+import 'package:fandom_app/view/fandom/my_fandoms.dart';
+import 'package:fandom_app/view/fandom_more/fandom_more.dart';
 import 'package:fandom_app/view/home_page.dart';
-import 'package:fandom_app/view/my_fandoms.dart';
 import 'package:fandom_app/view/news_more.dart';
 import 'package:fandom_app/view/profile/profile.dart';
 import 'package:fandom_app/view/profile/recent_activities.dart';
@@ -48,7 +48,7 @@ class RouteGenerator {
 
       case '/FandomsPage':
         return MaterialPageRoute(
-          builder: (_) => FandomsPage(),
+          builder: (_) => AllFandomsPage(),
         );
 
       case '/MyFandomsPage':

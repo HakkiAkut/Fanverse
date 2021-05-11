@@ -3,7 +3,6 @@ import 'package:fandom_app/util/init/route_generator.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
-import 'package:fandom_app/view_models/fandom_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +21,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AppUserVM(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => FandomVM(),
         ),
       ],
       child: MaterialApp(

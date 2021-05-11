@@ -53,7 +53,9 @@ Container announcementListTile(
                   fontSize: 18, color: Colors.black.withOpacity(0.8)),
             ),
             Text(
-              DateFormat.yMMMd().format(announcements.date.toDate()),
+              announcements.date != null
+                  ? DateFormat.yMMMd().format(announcements.date.toDate())
+                  : "",
               style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
             )
           ],

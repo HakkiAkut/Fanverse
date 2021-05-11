@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:fandom_app/models/announcements.dart';
-import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/util/methods/pick_image.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';

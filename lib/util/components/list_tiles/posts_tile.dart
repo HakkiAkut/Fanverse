@@ -33,7 +33,9 @@ Container postListTile(
                   fontSize: 18, color: Colors.black.withOpacity(0.8)),
             ),
             Text(
-              DateFormat.yMMMd().format(posts.date.toDate()),
+              posts.date != null
+                  ? DateFormat.yMMMd().format(posts.date.toDate())
+                  : "",
               style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
             )
           ],
@@ -50,23 +52,25 @@ Container postListTile(
         SizedBox(
           height: 4.0,
         ),
-        posts.imageUrl != "" ? Container(
-          height: DynamicSize.dynamicWidth(context, 0.50),
-          decoration: BoxDecoration(
-            color: Palette.MAIN_COLOR.shade200,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 20,
-                offset: Offset(0, 10),
-              ),
-            ],
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(posts.imageUrl),
-            ),
-          ),
-        ): Container(),
+        posts.imageUrl != ""
+            ? Container(
+                height: DynamicSize.dynamicWidth(context, 0.50),
+                decoration: BoxDecoration(
+                  color: Palette.MAIN_COLOR.shade200,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 20,
+                      offset: Offset(0, 10),
+                    ),
+                  ],
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(posts.imageUrl),
+                  ),
+                ),
+              )
+            : Container(),
         SizedBox(
           height: 8.0,
         ),

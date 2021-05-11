@@ -1,5 +1,5 @@
 import 'package:fandom_app/models/posts.dart';
-import 'package:fandom_app/view/fandom/fandom_posts.dart';
+import 'package:fandom_app/view/fandom_more/fandom_posts.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';
 import 'package:flutter/material.dart';

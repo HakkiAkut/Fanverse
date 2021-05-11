@@ -94,6 +94,27 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
+                      Container(
+                        width: DynamicSize.dynamicWidth(context, 0.9),
+                        child: TextButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.orange.shade900)),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, NavigationConstants.MY_FANDOMS);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.bookmark),
+                              Text(
+                                "Fandom Membership",
+                                style: labelText,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

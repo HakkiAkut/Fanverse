@@ -1,16 +1,21 @@
+import 'dart:io';
+
 import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/repositories/repository.dart';
 import 'package:fandom_app/services/base/database/db_announcements_methods.dart';
 import 'package:fandom_app/services/base/database/db_posts_methods.dart';
+import 'package:fandom_app/services/base/storage_methods.dart';
 import 'package:fandom_app/util/constants/app_state_enum.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
 import 'package:flutter/material.dart';
 
-class FandomMoreVM with ChangeNotifier implements AnnouncementsMethods, PostsMethods {
+class FandomMoreVM
+    with ChangeNotifier
+    implements AnnouncementsMethods, PostsMethods, StorageMethods {
   AppState _state = AppState.IDLE;
   Repository _repository = serviceLocator<Repository>();
-  int lim =10;
+  int lim = 10;
 
   AppState get state => _state;
 
@@ -19,11 +24,10 @@ class FandomMoreVM with ChangeNotifier implements AnnouncementsMethods, PostsMet
     notifyListeners();
   }
 
-
   @override
   Stream<List<Announcements>> getAnnouncements({int limit, String fid}) {
     print("announcements");
-    return _repository.getAnnouncements(limit: lim,fid: fid);
+    return _repository.getAnnouncements(limit: lim, fid: fid);
   }
 
   @override
@@ -39,5 +43,10 @@ class FandomMoreVM with ChangeNotifier implements AnnouncementsMethods, PostsMet
   @override
   Future<bool> setAnnouncement({Announcements announcements}) {
     return _repository.setAnnouncement(announcements: announcements);
+  }
+
+  @override
+  Future<String> uploadFile({String uid, File uploadedFile}) {
+    return _repository.uploadFile(uid: uid, uploadedFile: uploadedFile);
   }
 }

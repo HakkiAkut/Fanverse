@@ -1,0 +1,1 @@
+enum StorageService { FIREBASE, DEBUG }

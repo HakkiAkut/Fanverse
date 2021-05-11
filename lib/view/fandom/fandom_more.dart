@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/posts.dart';
+import 'package:fandom_app/util/components/button_style.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
 import 'package:fandom_app/util/constants/palette.dart';
@@ -86,11 +88,28 @@ class _FandomMoreState extends State<FandomMore> {
         ),
       ),
       SliverToBoxAdapter(
-        child: StreamProvider<List<Posts>>.value(
-          value: FandomMoreVM().getPostsByFID(fid: widget.fandom.fid),
-          initialData: [],
-          child: FandomPosts(),
-          updateShouldNotify: (prev, now) => true,
+        child: Column(
+          children: [
+            ElevatedButton(
+              style: buttonStyle,
+              onPressed: () {
+                FandomMoreVM().setPost(post: new Posts(fid: "11111111111",username:"username",text: "Text ulan"));
+              },
+              child: Text(
+                "Add Post",
+                style: labelText.copyWith(
+                  letterSpacing: 1.5,
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+            StreamProvider<List<Posts>>.value(
+              value: FandomMoreVM().getPostsByFID(fid: widget.fandom.fid),
+              initialData: [],
+              child: FandomPosts(),
+              updateShouldNotify: (prev, now) => true,
+            )
+          ],
         ),
       ),
     ];

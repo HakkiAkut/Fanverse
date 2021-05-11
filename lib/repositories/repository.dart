@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
@@ -9,8 +11,11 @@ import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
+import 'package:fandom_app/services/base/storage_methods.dart';
 import 'package:fandom_app/services/firebase/auth.dart';
 import 'package:fandom_app/services/firebase/firestore_db.dart';
+import 'package:fandom_app/services/firebase/storage.dart';
+import 'package:fandom_app/util/constants/StorageService.dart';
 import 'package:fandom_app/util/constants/database__service_enum.dart';
 import 'package:fandom_app/util/constants/web_service_enum.dart';
 import 'package:fandom_app/util/init/service_locator.dart';
@@ -27,10 +32,13 @@ class Repository
         UserMethods,
         FandomMethods,
         AnnouncementsMethods,
-        PostsMethods {
+        PostsMethods,
+        StorageMethods {
   Auth _auth = serviceLocator<Auth>();
+  Storage _storage = serviceLocator<Storage>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
   WebService _webService = WebService.FIREBASE;
+  StorageService _storageService = StorageService.FIREBASE;
   DatabaseService _databaseService = DatabaseService.FIRESTORE;
 
   @override
@@ -151,6 +159,14 @@ class Repository
   Future<bool> setAnnouncement({Announcements announcements}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
       return _firestore.setAnnouncement(announcements: announcements);
+    }
+    return null;
+  }
+
+  @override
+  Future<String> uploadFile({String uid, File uploadedFile}) {
+    if (_storageService == StorageService.FIREBASE) {
+      return _storage.uploadFile(uid: uid, uploadedFile: uploadedFile);
     }
     return null;
   }

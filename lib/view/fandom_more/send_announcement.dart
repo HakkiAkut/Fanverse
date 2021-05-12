@@ -75,7 +75,7 @@ class SendAnnouncement{
                       FandomMoreVM().setAnnouncement(announcements: announcement);
                     }
                   },
-                  child: Text("Post"),
+                  child: Text("Announce it"),
                 )
               ],
             );

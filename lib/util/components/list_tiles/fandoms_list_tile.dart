@@ -5,8 +5,8 @@ import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:flutter/material.dart';
 
-Container fandomListTile({@required BuildContext context, @required Fandom fandom}) {
-
+Container fandomListTile(
+    {@required BuildContext context, @required Fandom fandom}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
@@ -51,7 +51,7 @@ Container fandomListTile({@required BuildContext context, @required Fandom fando
                   fontSize: 18, color: Colors.black.withOpacity(0.8)),
             ),
             Text(
-              "1",
+              "${fandom.members.length}",
               style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
             )
           ],

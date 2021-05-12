@@ -73,28 +73,32 @@ class _FandomMoreState extends State<FandomMore> {
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <FloatingActionButton>[
+        children: <Widget>[
           _current == 0
-              ? FloatingActionButton(
-                  mini: true,
-                  onPressed: () {
-                    SendAnnouncement().dialog(
-                      context: context,
-                      fandom: widget.fandom,
-                    );
-                  },
-                  child: Icon(Icons.add),
-                )
-              : FloatingActionButton(
-                  mini: true,
-                  onPressed: () {
-                    SendPost().dialog(
-                        context: context,
-                        fandom: widget.fandom,
-                        appUser: _appUserVM.appUser);
-                  },
-                  child: Icon(Icons.add),
-                )
+              ? widget.fandom.admins[_appUserVM.appUser.uid] != true
+                  ? Container()
+                  : FloatingActionButton(
+                      mini: true,
+                      onPressed: () {
+                        SendAnnouncement().dialog(
+                          context: context,
+                          fandom: widget.fandom,
+                        );
+                      },
+                      child: Icon(Icons.add),
+                    )
+              : widget.fandom.members[_appUserVM.appUser.uid] != true
+                  ? Container()
+                  : FloatingActionButton(
+                      mini: true,
+                      onPressed: () {
+                        SendPost().dialog(
+                            context: context,
+                            fandom: widget.fandom,
+                            appUser: _appUserVM.appUser);
+                      },
+                      child: Icon(Icons.add),
+                    )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

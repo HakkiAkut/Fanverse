@@ -1,11 +1,13 @@
 import 'package:fandom_app/models/pages.dart';
+import 'package:fandom_app/util/components/text_style.dart';
+import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PagesView extends StatefulWidget {
-  final String title;
+  final Pages page;
 
-  const PagesView({Key key, this.title}) : super(key: key);
+  const PagesView({Key key, this.page}) : super(key: key);
 
   @override
   _PagesViewState createState() => _PagesViewState();
@@ -14,32 +16,39 @@ class PagesView extends StatefulWidget {
 class _PagesViewState extends State<PagesView> {
   @override
   Widget build(BuildContext context) {
-    final _pagesVM = Provider.of<List<Pages>>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: CustomScrollView(
+        primary: false,
+        slivers: [
+          SliverAppBar(
+            expandedHeight: DynamicSize.dynamicWidth(context, 0.75),
+            pinned: true,
+            primary: true,
+            backgroundColor: Palette.MAIN_COLOR,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                widget.page.imageUrl,
+                fit: BoxFit.cover,
+              ),
+              title: Text(
+                widget.page.name,
+                style: labelText.copyWith(fontSize: 15),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                widget.page.text,
+                style: labelText.copyWith(
+                  color: Colors.black.withOpacity(0.9),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-      body: _pagesVM.isNotEmpty
-          ? GridView.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: [
-                Container(
-                  child: Column(
-                    children: [
-                      Image.network(
-                        _pagesVM[0].imageUrl,
-                        fit: BoxFit.fill,
-                        height: 170,
-                      ),
-                      Text(_pagesVM[0].name)
-                    ],
-                  ),
-                )
-              ],
-            )
-          : CircularProgressIndicator(),
     );
   }
 }

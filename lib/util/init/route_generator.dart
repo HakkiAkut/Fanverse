@@ -3,6 +3,7 @@ import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/view/fandom/all_fandoms.dart';
 import 'package:fandom_app/view/fandom/my_fandoms.dart';
 import 'package:fandom_app/view/fandom_more/fandom_more.dart';
+import 'package:fandom_app/view/fandom_more/pages/pages_more.dart';
 import 'package:fandom_app/view/home_page.dart';
 import 'package:fandom_app/view/news_more.dart';
 import 'package:fandom_app/view/profile/profile.dart';
@@ -71,6 +72,17 @@ class RouteGenerator {
           );
         }
         return _errorRoute();
+
+      case '/PagesMore':
+        if (args is List<String>) {
+          return MaterialPageRoute(
+            builder: (_) => PagesMore(
+              classInfo: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
 
       case '/FandomMore':
         if (args is Fandom) {

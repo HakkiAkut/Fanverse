@@ -26,8 +26,10 @@ class Auth implements AuthMethods {
   /// Firebase sign out
   @override
   Future<bool> signOut() async {
-    await _gs.signIn();
+    /*
+     await _gs.signIn();
     await _gs.signOut();
+    */
     await _auth.signOut().onError((error, stackTrace) => false);
     return true;
   }

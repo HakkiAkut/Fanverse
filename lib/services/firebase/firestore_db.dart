@@ -4,10 +4,12 @@ import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/services/base/database/db_announcements_methods.dart';
 import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
+import 'package:fandom_app/services/base/database/db_pages_methods.dart';
 import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class FirestoreDB
         UserMethods,
         FandomMethods,
         AnnouncementsMethods,
-        PostsMethods {
+        PostsMethods, PagesMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -156,5 +158,16 @@ class FirestoreDB
       return false;
     }
 
+  }
+
+  @override
+  Stream<List<Pages>> getPages({String classId}) {
+    Stream<QuerySnapshot> qp = _firestore
+        .collection('pages')
+        .where("class_id", isEqualTo: classId)
+        .snapshots();
+
+    return qp.map(
+            (docs) => docs.docs.map((doc) => Pages.fromMap(doc.data())).toList());
   }
 }

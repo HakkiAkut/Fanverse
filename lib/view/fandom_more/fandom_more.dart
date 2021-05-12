@@ -3,6 +3,7 @@ import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/view/fandom_more/fandom_announcements.dart';
 import 'package:fandom_app/view/fandom_more/fandom_posts.dart';
@@ -13,6 +14,7 @@ import 'package:fandom_app/view_models/fandom_more_view_model.dart';
 import 'package:fandom_app/view_models/fandom_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 
 class FandomMore extends StatefulWidget {
@@ -71,34 +73,57 @@ class _FandomMoreState extends State<FandomMore> {
           fandomTabs(context)[_current],
         ],
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          _current == 0
-              ? widget.fandom.admins[_appUserVM.appUser.uid] != true
-                  ? Container()
-                  : FloatingActionButton(
-                      mini: true,
-                      onPressed: () {
-                        SendAnnouncement().dialog(
-                          context: context,
-                          fandom: widget.fandom,
-                        );
-                      },
-                      child: Icon(Icons.add),
-                    )
-              : widget.fandom.members[_appUserVM.appUser.uid] != true
-                  ? Container()
-                  : FloatingActionButton(
-                      mini: true,
-                      onPressed: () {
-                        SendPost().dialog(
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Positioned(
+            right: 3,
+            bottom: 70,
+            child: _current == 0
+                ? widget.fandom.admins[_appUserVM.appUser.uid] != true
+                    ? Container()
+                    : FloatingActionButton(
+                        mini: true,
+                        onPressed: () {
+                          SendAnnouncement().dialog(
                             context: context,
                             fandom: widget.fandom,
-                            appUser: _appUserVM.appUser);
-                      },
-                      child: Icon(Icons.add),
-                    )
+                          );
+                        },
+                        child: Icon(Icons.add),
+                      )
+                : widget.fandom.members[_appUserVM.appUser.uid] != true
+                    ? Container()
+                    : FloatingActionButton(
+                        mini: true,
+                        onPressed: () {
+                          SendPost().dialog(
+                              context: context,
+                              fandom: widget.fandom,
+                              appUser: _appUserVM.appUser);
+                        },
+                        child: Icon(Icons.add),
+                      ),
+          ),
+          SpeedDial(
+            icon: Icons.add,
+            activeIcon: Icons.remove,
+            overlayColor: Colors.black,
+            overlayOpacity: 0.6,
+            children: [
+              SpeedDialChild(
+                  child: Icon(Icons.add_circle),
+                  label: "Characters",
+                  onTap: () {
+                    Navigator.pushNamed(context, NavigationConstants.PAGES_MORE,
+                        arguments: <String>[
+                          widget.fandom.pageClasses[
+                              widget.fandom.pageClasses.keys.first],
+                          widget.fandom.pageClasses.keys.first
+                        ]);
+                  }),
+            ],
+          )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -4,11 +4,13 @@ import 'package:fandom_app/models/announcements.dart';
 import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
+import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/models/posts.dart';
 import 'package:fandom_app/services/base/auth_methods.dart';
 import 'package:fandom_app/services/base/database/db_announcements_methods.dart';
 import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
 import 'package:fandom_app/services/base/database/db_news_methods.dart';
+import 'package:fandom_app/services/base/database/db_pages_methods.dart';
 import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:fandom_app/services/base/storage_methods.dart';
@@ -34,7 +36,7 @@ class Repository
         FandomMethods,
         AnnouncementsMethods,
         PostsMethods,
-        StorageMethods {
+        StorageMethods, PagesMethods {
   Auth _auth = serviceLocator<Auth>();
   Storage _storage = serviceLocator<Storage>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
@@ -192,6 +194,14 @@ class Repository
   Future<bool> joinFandom({String uid, Fandom fandom}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
       return await _firestore.joinFandom(uid: uid, fandom: fandom);
+    }
+    return null;
+  }
+
+  @override
+  Stream<List<Pages>> getPages({String classId}) {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return _firestore.getPages(classId: classId);
     }
     return null;
   }

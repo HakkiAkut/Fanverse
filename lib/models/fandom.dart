@@ -5,7 +5,7 @@ class Fandom {
   String description;
   Map<String, dynamic> members; // user id of members
   Map<String, dynamic> admins;
-  List<SubClasses> classes; // general titles like Kingdoms, Characters
+  Map<String, dynamic> pageClasses; // general titles like Kingdoms, Characters
   String imageUrl;
 
   Fandom(
@@ -14,7 +14,7 @@ class Fandom {
       this.description,
       this.members,
       this.admins,
-      this.classes,
+      this.pageClasses,
       this.imageUrl});
 
   Map<String, dynamic> toMap() {
@@ -25,6 +25,7 @@ class Fandom {
       "members": members,
       "admins": admins,
       "image": imageUrl,
+      "page_classes":pageClasses,
     };
   }
 
@@ -36,20 +37,8 @@ class Fandom {
       members: map["members"],
       admins: map["admins"],
       imageUrl: map["image"] as String,
+      pageClasses: map["page_classes"],
     );
   }
 }
 
-class SubClasses {
-  String cid; // class id
-  String name;
-  List<Page> pages;
-}
-
-class Page {
-  String pid; // page id
-  String name;
-  String imageUrl;
-  Map<String, String> generalInfo;
-  String text;
-}

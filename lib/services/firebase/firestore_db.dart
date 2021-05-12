@@ -144,4 +144,17 @@ class FirestoreDB
     return qp.map(
         (docs) => docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
   }
+
+  @override
+  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+    try {
+      fandom.members[uid]= true;
+      await _firestore.collection("Fandom").doc(fandom.fid).update(fandom.toMap());
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+
+  }
 }

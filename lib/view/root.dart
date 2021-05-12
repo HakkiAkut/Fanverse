@@ -8,6 +8,7 @@ import 'package:fandom_app/view_models/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class RootPage extends StatelessWidget {
   bool goToSignIn;
 

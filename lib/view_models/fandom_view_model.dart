@@ -47,4 +47,13 @@ class FandomVM with ChangeNotifier implements FandomMethods {
   Stream<List<Fandom>> getFandomByUID({String uid}) {
     return _repository.getFandomByUID(uid: uid);
   }
+
+  @override
+  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+    try{
+      return await _repository.joinFandom(uid: uid, fandom: fandom);
+    } catch(e){
+      return null;
+    }
+  }
 }

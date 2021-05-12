@@ -10,6 +10,7 @@ import 'package:fandom_app/view/fandom_more/send_announcement.dart';
 import 'package:fandom_app/view/fandom_more/send_post.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/fandom_more_view_model.dart';
+import 'package:fandom_app/view_models/fandom_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,12 +29,30 @@ class _FandomMoreState extends State<FandomMore> {
 
   @override
   Widget build(BuildContext context) {
+    print("it works" + widget.fandom.fid);
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       body: CustomScrollView(
         primary: false,
         slivers: [
           SliverAppBar(
+            actions: [
+              TextButton(
+                child: Icon(
+                    widget.fandom.members[_appUserVM.appUser.uid] != true
+                        ? Icons.bookmark_border
+                        : Icons.bookmark),
+                onPressed: () async {
+                  bool b1 = await FandomVM().joinFandom(
+                      uid: _appUserVM.appUser.uid, fandom: widget.fandom);
+                  if (b1 != null && b1 != false) {
+                    setState(() {
+                      widget.fandom.members[_appUserVM.appUser.uid] = true;
+                    });
+                  }
+                },
+              ),
+            ],
             expandedHeight: DynamicSize.dynamicWidth(context, 0.75),
             pinned: true,
             primary: true,

@@ -183,7 +183,15 @@ class Repository
   @override
   Stream<List<Fandom>> getFandomByUID({String uid}) {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return  _firestore.getFandomByUID(uid: uid);
+      return _firestore.getFandomByUID(uid: uid);
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+    if (_databaseService == DatabaseService.FIRESTORE) {
+      return await _firestore.joinFandom(uid: uid, fandom: fandom);
     }
     return null;
   }

@@ -1,4 +1,3 @@
-import 'package:fandom_app/models/app_user.dart';
 
 class Fandom {
   String fid; // fandom id

@@ -62,7 +62,7 @@ class Repository
     if (_webService == WebService.FIREBASE) {
       AppUser appUser = await _auth.signInWithEmail(email: email, pwd: pwd);
       if (appUser != null) {
-        return appUser;
+        return await currentUser();
       }
     }
     return null;
@@ -85,7 +85,7 @@ class Repository
       if (appUser != null) {
         appUser.username = username;
         await setUser(appUser: appUser);
-        return appUser;
+        return await currentUser();
       }
     }
     return null;

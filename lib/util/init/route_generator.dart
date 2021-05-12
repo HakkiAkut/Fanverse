@@ -4,7 +4,6 @@ import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/view/fandom/all_fandoms.dart';
 import 'package:fandom_app/view/fandom/my_fandoms.dart';
 import 'package:fandom_app/view/fandom_more/fandom_more.dart';
-import 'package:fandom_app/view/fandom_more/pages/pages_list.dart';
 import 'package:fandom_app/view/fandom_more/pages/pages_more.dart';
 import 'package:fandom_app/view/fandom_more/pages/pages_view.dart';
 import 'package:fandom_app/view/home_page.dart';

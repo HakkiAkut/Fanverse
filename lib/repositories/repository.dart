@@ -205,4 +205,18 @@ class Repository
     }
     return null;
   }
+
+  @override
+  Future<bool> createFandom({Fandom fandom}) async {
+    if (_databaseService==DatabaseService.FIRESTORE){
+      return await _firestore.createFandom(fandom: fandom);
+    }
+    return false;
+  }
+
+  @override
+  Future<bool> createPage({List<String> list}) {
+    // TODO: implement createPage
+    throw UnimplementedError();
+  }
 }

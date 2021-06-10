@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/repositories/repository.dart';
 import 'package:fandom_app/services/base/database/db_fandom_methods.dart';
@@ -50,10 +52,20 @@ class FandomVM with ChangeNotifier implements FandomMethods {
 
   @override
   Future<bool> joinFandom({String uid, Fandom fandom}) async {
-    try{
+    try {
       return await _repository.joinFandom(uid: uid, fandom: fandom);
-    } catch(e){
+    } catch (e) {
       return null;
+    }
+  }
+
+  @override
+  Future<bool> createFandom({Fandom fandom, File file}) async {
+    try {
+      fandom.imageUrl = await _repository.uploadFile(uid: fandom.admins[0], uploadedFile: file);
+      return await _repository.createFandom(fandom: fandom);
+    } catch (e) {
+      return false;
     }
   }
 }

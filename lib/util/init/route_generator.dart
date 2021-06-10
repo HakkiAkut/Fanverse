@@ -2,6 +2,7 @@ import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/view/fandom/all_fandoms.dart';
+import 'package:fandom_app/view/fandom/create_fandom.dart';
 import 'package:fandom_app/view/fandom/my_fandoms.dart';
 import 'package:fandom_app/view/fandom_more/fandom_more.dart';
 import 'package:fandom_app/view/fandom_more/pages/pages_more.dart';
@@ -48,7 +49,6 @@ class RouteGenerator {
           builder: (_) => RecentActivities(),
         );
 
-
       case '/FandomsPage':
         return MaterialPageRoute(
           builder: (_) => AllFandomsPage(),
@@ -85,6 +85,12 @@ class RouteGenerator {
         }
         return _errorRoute();
 
+      case '/CreateFandom':
+        return MaterialPageRoute(
+          builder: (_) => CreateFandom(),
+        );
+        return _errorRoute();
+
       case '/PagesView':
         if (args is Pages) {
           return MaterialPageRoute(
@@ -94,7 +100,6 @@ class RouteGenerator {
           );
         }
         return _errorRoute();
-
 
       case '/FandomMore':
         if (args is Fandom) {

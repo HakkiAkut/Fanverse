@@ -21,4 +21,10 @@ class PagesVM with ChangeNotifier implements PagesMethods {
   Stream<List<Pages>> getPages({String classId}) {
     return _repository.getPages(classId: classId);
   }
+
+  @override
+  Future<bool> createPage({List<String> list}) {
+    // TODO: implement createPage
+    throw UnimplementedError();
+  }
 }

@@ -4,4 +4,5 @@ abstract class FandomMethods {
   Stream<List<Fandom>> getFandom();
   Stream<List<Fandom>> getFandomByUID({String uid});
   Future<bool> joinFandom({String uid, Fandom fandom});
+  Future<bool> createFandom({Fandom fandom});
 }

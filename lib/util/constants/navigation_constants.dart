@@ -11,4 +11,5 @@ class NavigationConstants {
   static const RECENT_ACTIVITIES = "/RecentActivities";
   static const PAGES_MORE = "/PagesMore";
   static const PAGES_VIEW = "/PagesView";
+  static const CREATE_FANDOM = "/CreateFandom";
 }

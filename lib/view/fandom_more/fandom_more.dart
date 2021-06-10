@@ -110,19 +110,7 @@ class _FandomMoreState extends State<FandomMore> {
             activeIcon: Icons.remove,
             overlayColor: Colors.black,
             overlayOpacity: 0.6,
-            children: [
-              SpeedDialChild(
-                  child: Icon(Icons.add_circle),
-                  label: "Characters",
-                  onTap: () {
-                    Navigator.pushNamed(context, NavigationConstants.PAGES_MORE,
-                        arguments: <String>[
-                          widget.fandom.pageClasses[
-                              widget.fandom.pageClasses.keys.first],
-                          widget.fandom.pageClasses.keys.first
-                        ]);
-                  }),
-            ],
+            children: dialChildren(widget.fandom),
           )
         ],
       ),
@@ -172,5 +160,24 @@ class _FandomMoreState extends State<FandomMore> {
         ),
       ),
     ];
+  }
+
+  List<SpeedDialChild> dialChildren(Fandom fandom) {
+    List<SpeedDialChild> list = [];
+    for (int i = 0; i < fandom.pageClasses.length; i++) {
+      list.add(SpeedDialChild(
+        child: Icon(Icons.add_circle),
+        label: fandom.pageClasses.keys.elementAt(i),
+        onTap: (){
+          Navigator.pushNamed(context, NavigationConstants.PAGES_MORE,
+              arguments: <String>[
+                widget.fandom.pageClasses[
+                fandom.pageClasses.keys.elementAt(i)],
+                fandom.pageClasses.keys.elementAt(i)
+              ]);
+        }
+      ));
+    }
+    return list;
   }
 }

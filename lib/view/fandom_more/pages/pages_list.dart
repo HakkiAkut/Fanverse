@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 
 class PagesList extends StatefulWidget {
   final String title;
+  final String classId;
 
-  const PagesList({Key key, this.title}) : super(key: key);
+  const PagesList({Key key, this.title, this.classId}) : super(key: key);
 
   @override
   _PagesListState createState() => _PagesListState();
@@ -20,32 +21,48 @@ class _PagesListState extends State<PagesList> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          //Nav
+          Navigator.pushNamed(context, NavigationConstants.CREATE_PAGE,
+              arguments: widget.classId);
+        },
+      ),
       body: _pagesVM.isNotEmpty
-          ? GridView.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, NavigationConstants.PAGES_VIEW, arguments: _pagesVM.first);
-                    },
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Image.network(
-                            _pagesVM[0].imageUrl,
+          ? GridView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemCount: _pagesVM.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  color: Colors.amber,
+                  child: Column(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, NavigationConstants.PAGES_VIEW,
+                              arguments: _pagesVM.first);
+                        },
+                        child: Container(
+                          height: 140,
+                          child: Image.network(
+                            _pagesVM[index].imageUrl,
                             fit: BoxFit.fill,
-                            height: 155,
                           ),
-                          Text(_pagesVM[0].name)
-                        ],
+                        ),
                       ),
-                    ))
-              ],
-            )
+                      Text(_pagesVM[index].name)
+                    ],
+                  ),
+                );
+              })
           : CircularProgressIndicator(),
     );
   }
 }
+/**/

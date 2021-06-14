@@ -12,4 +12,5 @@ class NavigationConstants {
   static const PAGES_MORE = "/PagesMore";
   static const PAGES_VIEW = "/PagesView";
   static const CREATE_FANDOM = "/CreateFandom";
+  static const CREATE_PAGE = "/CreatePage";
 }

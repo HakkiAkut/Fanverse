@@ -215,8 +215,10 @@ class Repository
   }
 
   @override
-  Future<bool> createPage({List<String> list}) {
-    // TODO: implement createPage
-    throw UnimplementedError();
+  Future<bool> createPage({Pages page}) async {
+    if (_databaseService==DatabaseService.FIRESTORE){
+      return await _firestore.createPage(page: page);
+    }
+    return false;
   }
 }

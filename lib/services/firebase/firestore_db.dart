@@ -193,7 +193,16 @@ class FirestoreDB
   }
 
   @override
-  Future<bool> createPage({List<String> list}) {
-
+  Future<bool> createPage({Pages page}) async {
+    try {
+      DocumentReference ref =
+          await _firestore.collection("pages").add(page.toMap());
+      print(ref.id);
+      page.pid= ref.id;
+      await _firestore.collection("pages").doc(ref.id).update(page.toMap());
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }

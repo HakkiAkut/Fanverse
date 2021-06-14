@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/repositories/repository.dart';
 import 'package:fandom_app/services/base/database/db_pages_methods.dart';
@@ -23,8 +25,9 @@ class PagesVM with ChangeNotifier implements PagesMethods {
   }
 
   @override
-  Future<bool> createPage({List<String> list}) {
-    // TODO: implement createPage
-    throw UnimplementedError();
+  Future<bool> createPage({Pages page, File file}) async {
+    page.imageUrl =
+        await _repository.uploadFile(uid: page.name, uploadedFile: file);
+    return await _repository.createPage(page: page);
   }
 }

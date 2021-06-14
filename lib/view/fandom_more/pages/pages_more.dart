@@ -20,7 +20,7 @@ class _PagesMoreState extends State<PagesMore> {
     return StreamProvider<List<Pages>>.value(
       value: PagesVM().getPages(classId: widget.classInfo[0]),
       initialData: [],
-      child: PagesList(title: widget.classInfo[1],),
+      child: PagesList(title: widget.classInfo[1],classId: widget.classInfo[0],),
       updateShouldNotify: (prev, now) => true,
     );
   }

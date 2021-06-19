@@ -12,7 +12,7 @@ import 'package:fandom_app/view/home_page.dart';
 import 'package:fandom_app/view/news_more.dart';
 import 'package:fandom_app/view/profile/profile.dart';
 import 'package:fandom_app/view/profile/recent_activities.dart';
-import 'package:fandom_app/view/recommendation.dart';
+import 'file:///D:/repo/fandom_app/fandom_app/lib/view/leaderboard/leaderboard.dart';
 import 'package:fandom_app/view/root.dart';
 import 'package:flutter/material.dart';
 
@@ -60,9 +60,9 @@ class RouteGenerator {
           builder: (_) => MyFandomsPage(),
         );
 
-      case '/RecommendationPage':
+      case '/LeaderBoardPage':
         return MaterialPageRoute(
-          builder: (_) => RecommendationPage(),
+          builder: (_) => LeaderBoardPage(),
         );
 
       case '/NewsMorePage':

@@ -5,7 +5,7 @@ class NavigationConstants {
   static const PROFILE = "/ProfilePage";
   static const FANDOMS = "/FandomsPage";
   static const MY_FANDOMS = "/MyFandomsPage";
-  static const RECOMMENDATION = "/RecommendationPage";
+  static const LEADERBOARD = "/LeaderBoardPage";
   static const SIGN_OUT = "/RootPage";
   static const FANDOM_MORE = "/FandomMore";
   static const RECENT_ACTIVITIES = "/RecentActivities";

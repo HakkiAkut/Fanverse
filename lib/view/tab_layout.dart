@@ -64,10 +64,10 @@ class TabLayout {
           ),
           _customListTile(
             context: context,
-            icon1: Icons.recommend,
-            text: "Recommendation",
+            icon1: Icons.leaderboard,
+            text: "Leaderboard",
             icon2: Icons.arrow_right,
-            navigation: NavigationConstants.RECOMMENDATION,
+            navigation: NavigationConstants.LEADERBOARD,
           ),
           _customListTile(
             context: context,
@@ -113,7 +113,8 @@ class TabLayout {
         onTap: () async {
           switch (navigation) {
             case NavigationConstants.HOME_PAGE:
-              Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,arguments: true);
+              Navigator.pushReplacementNamed(context, NavigationConstants.ROOT,
+                  arguments: true);
               break;
             case NavigationConstants.PROFILE:
               Navigator.pushNamed(context, NavigationConstants.PROFILE);
@@ -124,8 +125,8 @@ class TabLayout {
             case NavigationConstants.MY_FANDOMS:
               Navigator.pushNamed(context, NavigationConstants.MY_FANDOMS);
               break;
-            case NavigationConstants.RECOMMENDATION:
-              Navigator.pushNamed(context, NavigationConstants.RECOMMENDATION);
+            case NavigationConstants.LEADERBOARD:
+              Navigator.pushNamed(context, NavigationConstants.LEADERBOARD);
               break;
             case NavigationConstants.SIGN_OUT:
               bool signOut = await _appUserVM.signOut();

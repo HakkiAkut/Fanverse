@@ -152,9 +152,9 @@ class FirestoreDB
   }
 
   @override
-  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+  Future<bool> joinFandom({String uid, Fandom fandom, bool changeTo}) async {
     try {
-      fandom.members[uid] = true;
+      fandom.members[uid] = changeTo;
       await _firestore
           .collection("Fandom")
           .doc(fandom.fid)

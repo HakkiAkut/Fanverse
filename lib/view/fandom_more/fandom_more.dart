@@ -31,7 +31,6 @@ class _FandomMoreState extends State<FandomMore> {
 
   @override
   Widget build(BuildContext context) {
-    print("it works" + widget.fandom.fid);
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       body: CustomScrollView(
@@ -40,20 +39,23 @@ class _FandomMoreState extends State<FandomMore> {
           SliverAppBar(
             actions: [
               TextButton(
-                child: Icon(
-                    widget.fandom.members[_appUserVM.appUser.uid] != true
-                        ? Icons.bookmark_border
-                        : Icons.bookmark),
-                onPressed: () async {
-                  bool b1 = await FandomVM().joinFandom(
-                      uid: _appUserVM.appUser.uid, fandom: widget.fandom);
-                  if (b1 != null && b1 != false) {
-                    setState(() {
-                      widget.fandom.members[_appUserVM.appUser.uid] = true;
-                    });
-                  }
-                },
-              ),
+                  child: Icon(
+                      widget.fandom.members[_appUserVM.appUser.uid] != true
+                          ? Icons.bookmark_border
+                          : Icons.bookmark),
+                  onPressed: () async {
+                    bool b1 = await FandomVM().joinFandom(
+                        uid: _appUserVM.appUser.uid,
+                        fandom: widget.fandom,
+                        changeTo:
+                            widget.fandom.members[_appUserVM.appUser.uid] !=
+                                    true
+                                ? true
+                                : false);
+                    if (b1 != null && b1 != false) {
+                      setState(() {});
+                    }
+                  }),
             ],
             expandedHeight: DynamicSize.dynamicWidth(context, 0.75),
             pinned: true,
@@ -166,17 +168,16 @@ class _FandomMoreState extends State<FandomMore> {
     List<SpeedDialChild> list = [];
     for (int i = 0; i < fandom.pageClasses.length; i++) {
       list.add(SpeedDialChild(
-        child: Icon(Icons.add_circle),
-        label: fandom.pageClasses.keys.elementAt(i),
-        onTap: (){
-          Navigator.pushNamed(context, NavigationConstants.PAGES_MORE,
-              arguments: <String>[
-                widget.fandom.pageClasses[
-                fandom.pageClasses.keys.elementAt(i)],
-                fandom.pageClasses.keys.elementAt(i)
-              ]);
-        }
-      ));
+          child: Icon(Icons.add_circle),
+          label: fandom.pageClasses.keys.elementAt(i),
+          onTap: () {
+            Navigator.pushNamed(context, NavigationConstants.PAGES_MORE,
+                arguments: <String>[
+                  widget
+                      .fandom.pageClasses[fandom.pageClasses.keys.elementAt(i)],
+                  fandom.pageClasses.keys.elementAt(i)
+                ]);
+          }));
     }
     return list;
   }

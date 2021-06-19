@@ -25,7 +25,7 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
                 color: Palette.getRandomColor(),
                 child: ListTile(
                   title: Text(_fandomVM[index].name),
-                  trailing: Text("${getNumber(_fandomVM[index])}"),
+                  trailing: Text("${_fandomVM[index].getNumberOfMembers()}"),
                   onTap: () {
                     Navigator.pushNamed(
                         context, NavigationConstants.FANDOM_MORE,
@@ -36,15 +36,5 @@ class _LeaderBoardListState extends State<LeaderBoardList> {
             }),
       ),
     );
-  }
-
-  getNumber(Fandom fandom) {
-    int member = 0;
-    fandom.members.forEach((key, value) {
-      if (value == true) {
-        member += 1;
-      }
-    });
-    return member;
   }
 }

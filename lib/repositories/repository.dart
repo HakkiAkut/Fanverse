@@ -191,9 +191,9 @@ class Repository
   }
 
   @override
-  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+  Future<bool> joinFandom({String uid, Fandom fandom, bool changeTo}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return await _firestore.joinFandom(uid: uid, fandom: fandom);
+      return await _firestore.joinFandom(uid: uid, fandom: fandom,changeTo: changeTo);
     }
     return null;
   }

@@ -51,9 +51,9 @@ class FandomVM with ChangeNotifier implements FandomMethods {
   }
 
   @override
-  Future<bool> joinFandom({String uid, Fandom fandom}) async {
+  Future<bool> joinFandom({String uid, Fandom fandom, bool changeTo}) async {
     try {
-      return await _repository.joinFandom(uid: uid, fandom: fandom);
+      return await _repository.joinFandom(uid: uid, fandom: fandom, changeTo: changeTo);
     } catch (e) {
       return null;
     }

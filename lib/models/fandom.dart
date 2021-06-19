@@ -40,5 +40,16 @@ class Fandom {
       pageClasses: map["page_classes"],
     );
   }
+
+  int getNumberOfMembers() {
+    int member = 0;
+    this.members.forEach((key, value) {
+      if (value == true) {
+        member += 1;
+      }
+    });
+    return member;
+  }
+
 }
 

@@ -6,12 +6,12 @@ import 'package:fandom_app/util/constants/palette.dart';
 import 'package:flutter/material.dart';
 
 Container fandomListTile(
-    {@required BuildContext context, @required Fandom fandom}) {
+    {@required BuildContext context, @required Fandom fandom, bool isDarkMode}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white,
+      color: Palette.getBackground(isDarkMode),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.15),
@@ -48,11 +48,11 @@ Container fandomListTile(
             Text(
               fandom.name,
               style: labelText.copyWith(
-                  fontSize: 18, color: Colors.black.withOpacity(0.8)),
+                  fontSize: 18, color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             ),
             Text(
               "${fandom.members.length}",
-              style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
+              style: labelText.copyWith(color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             )
           ],
         ),
@@ -63,7 +63,7 @@ Container fandomListTile(
           fandom.description,
           maxLines: 5,
           style: labelText.copyWith(
-            color: Colors.black.withOpacity(0.9),
+            color: Palette.getTextColor(isDarkMode).withOpacity(0.9),
           ),
         ),
         SizedBox(

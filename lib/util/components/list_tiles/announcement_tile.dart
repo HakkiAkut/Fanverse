@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 Container announcementListTile(
-    {@required BuildContext context, @required Announcements announcements}) {
+    {@required BuildContext context, @required Announcements announcements, bool isDarkMode}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white,
+      color: Palette.getBackground(isDarkMode),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.15),
@@ -50,13 +50,13 @@ Container announcementListTile(
             Text(
               announcements.title,
               style: labelText.copyWith(
-                  fontSize: 18, color: Colors.black.withOpacity(0.8)),
+                  fontSize: 18, color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             ),
             Text(
               announcements.date != null
                   ? DateFormat.yMMMd().format(announcements.date.toDate())
                   : "",
-              style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
+              style: labelText.copyWith(color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             )
           ],
         ),
@@ -66,7 +66,7 @@ Container announcementListTile(
         Text(
           announcements.text,
           style: labelText.copyWith(
-            color: Colors.black.withOpacity(0.9),
+            color: Palette.getTextColor(isDarkMode).withOpacity(0.9),
           ),
         ),
         SizedBox(

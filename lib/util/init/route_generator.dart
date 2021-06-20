@@ -14,6 +14,7 @@ import 'package:fandom_app/view/profile/profile.dart';
 import 'package:fandom_app/view/profile/recent_activities.dart';
 import 'file:///D:/repo/fandom_app/fandom_app/lib/view/leaderboard/leaderboard.dart';
 import 'package:fandom_app/view/root.dart';
+import 'package:fandom_app/view/settings.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -63,6 +64,11 @@ class RouteGenerator {
       case '/LeaderBoardPage':
         return MaterialPageRoute(
           builder: (_) => LeaderBoardPage(),
+        );
+
+      case '/Settings':
+        return MaterialPageRoute(
+          builder: (_) => SettingsPage(),
         );
 
       case '/NewsMorePage':

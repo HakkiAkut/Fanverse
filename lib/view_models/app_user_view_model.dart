@@ -11,8 +11,15 @@ class AppUserVM with ChangeNotifier implements AuthMethods, UserMethods {
 
   Repository _repository = serviceLocator<Repository>();
   AppUser _appUser;
+  bool _isDarkTheme = false;
 
   AppUser get appUser => _appUser;
+
+  darkTheme(bool isDarkTheme){
+    _isDarkTheme = isDarkTheme;
+  }
+
+  bool get isDarkTheme => _isDarkTheme;
 
   AppState get state => _state;
 

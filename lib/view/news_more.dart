@@ -2,8 +2,10 @@ import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/util/components/text_style.dart';
 import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/constants/dynamic_size.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class NewsMore extends StatefulWidget {
   final News news;
@@ -17,9 +19,14 @@ class NewsMore extends StatefulWidget {
 class _NewsMoreState extends State<NewsMore> {
   @override
   Widget build(BuildContext context) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("News"),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text("News",
+          style: TextStyle(
+            color: Palette.getTextColor(_appUserVM.isDarkTheme),
+          ),),
       ),
       body: Container(
         child: SingleChildScrollView(

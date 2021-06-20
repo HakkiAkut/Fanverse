@@ -60,7 +60,7 @@ class _FandomMoreState extends State<FandomMore> {
             expandedHeight: DynamicSize.dynamicWidth(context, 0.75),
             pinned: true,
             primary: true,
-            backgroundColor: Palette.MAIN_COLOR,
+            backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
                 widget.fandom.imageUrl,
@@ -68,7 +68,7 @@ class _FandomMoreState extends State<FandomMore> {
               ),
               title: Text(
                 widget.fandom.name,
-                style: labelText.copyWith(fontSize: 15),
+                style: labelText.copyWith(fontSize: 15,color: Palette.getTextColor(_appUserVM.isDarkTheme),),
               ),
             ),
           ),

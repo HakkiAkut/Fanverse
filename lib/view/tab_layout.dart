@@ -7,13 +7,14 @@ import 'package:provider/provider.dart';
 
 class TabLayout {
   static Drawer buildDrawer({@required BuildContext context}) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Drawer(
       child: ListView(
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: Palette.GRADIENT_COLOR,
+                colors: Palette.getGradientColor(_appUserVM.isDarkTheme),
               ),
             ),
             child: Center(
@@ -71,6 +72,13 @@ class TabLayout {
           ),
           _customListTile(
             context: context,
+            icon1: Icons.settings,
+            text: "Settings",
+            icon2: Icons.arrow_right,
+            navigation: NavigationConstants.SETTINGS,
+          ),
+          _customListTile(
+            context: context,
             icon1: Icons.backspace,
             text: "Sign Out",
             icon2: null,
@@ -91,6 +99,7 @@ class TabLayout {
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Container(
       decoration: BoxDecoration(
+        color: Palette.getBackground(_appUserVM.isDarkTheme),
         border: Border(
           bottom: BorderSide(color: Colors.red.shade100),
         ),
@@ -98,17 +107,17 @@ class TabLayout {
       child: ListTile(
         leading: Icon(
           icon1,
-          color: Palette.BOLD_COLOR,
+          color: Palette.getTabLayoutColor(_appUserVM.isDarkTheme),
         ),
         title: Text(
           text,
           style: TextStyle(
-            color: Palette.BOLD_COLOR,
+            color: Palette.getTabLayoutColor(_appUserVM.isDarkTheme),
           ),
         ),
         trailing: Icon(
           icon2,
-          color: Palette.BOLD_COLOR,
+          color: Palette.getTabLayoutColor(_appUserVM.isDarkTheme),
         ),
         onTap: () async {
           switch (navigation) {
@@ -127,6 +136,9 @@ class TabLayout {
               break;
             case NavigationConstants.LEADERBOARD:
               Navigator.pushNamed(context, NavigationConstants.LEADERBOARD);
+              break;
+            case NavigationConstants.SETTINGS:
+              Navigator.pushNamed(context, NavigationConstants.SETTINGS);
               break;
             case NavigationConstants.SIGN_OUT:
               bool signOut = await _appUserVM.signOut();

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/util/components/text_style.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/methods/pick_image.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/pages_view_model.dart';
@@ -26,7 +27,10 @@ class _CreatePageState extends State<CreatePage> {
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Fandom"),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text("Create Page",style: TextStyle(
+          color: Palette.getTextColor(_appUserVM.isDarkTheme),
+        ),),
       ),
       body: SingleChildScrollView(
         child: Container(

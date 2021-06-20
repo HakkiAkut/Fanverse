@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/util/components/text_style.dart';
+import 'package:fandom_app/util/constants/palette.dart';
 import 'package:fandom_app/util/methods/pick_image.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:fandom_app/view_models/fandom_view_model.dart';
@@ -26,7 +27,13 @@ class _CreateFandomState extends State<CreateFandom> {
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Fandom"),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text(
+          "Create Fandom",
+          style: TextStyle(
+            color: Palette.getTextColor(_appUserVM.isDarkTheme),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -142,7 +149,8 @@ class _CreateFandomState extends State<CreateFandom> {
                         _appUserVM.appUser.uid: true
                       };
                       for (int i = 0; i < tecList.length; i++) {
-                        str[tecList[i].value.text] = "${tec1.value.text}_${tecList[i].value.text}";
+                        str[tecList[i].value.text] =
+                            "${tec1.value.text}_${tecList[i].value.text}";
                       }
                       Fandom fandom = Fandom(
                           name: tec1.value.text,

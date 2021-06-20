@@ -1,6 +1,7 @@
 import 'package:fandom_app/models/fandom.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
 import 'package:fandom_app/util/constants/palette.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +13,15 @@ class LeaderBoardList extends StatefulWidget {
 class _LeaderBoardListState extends State<LeaderBoardList> {
   @override
   Widget build(BuildContext context) {
+    final _appUserVM = Provider.of<AppUserVM>(context);
     final _fandomVM = Provider.of<List<Fandom>>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Leaderboard"),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text("Leaderboard",
+          style: TextStyle(
+            color: Palette.getTextColor(_appUserVM.isDarkTheme),
+          ),),
       ),
       body: Container(
         child: ListView.builder(

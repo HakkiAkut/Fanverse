@@ -1,5 +1,7 @@
 import 'package:fandom_app/models/pages.dart';
 import 'package:fandom_app/util/constants/navigation_constants.dart';
+import 'package:fandom_app/util/constants/palette.dart';
+import 'package:fandom_app/view_models/app_user_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +19,16 @@ class _PagesListState extends State<PagesList> {
   @override
   Widget build(BuildContext context) {
     final _pagesVM = Provider.of<List<Pages>>(context);
+    final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: Palette.getTextColor(_appUserVM.isDarkTheme),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

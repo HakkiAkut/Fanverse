@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 Container postListTile(
-    {@required BuildContext context, @required Posts posts}) {
+    {@required BuildContext context, @required Posts posts, bool isDarkMode}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white,
+      color: Palette.getBackground(isDarkMode),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.15),
@@ -30,13 +30,13 @@ Container postListTile(
             Text(
               posts.username,
               style: labelText.copyWith(
-                  fontSize: 18, color: Colors.black.withOpacity(0.8)),
+                  fontSize: 18, color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             ),
             Text(
               posts.date != null
                   ? DateFormat.yMMMd().format(posts.date.toDate())
                   : "",
-              style: labelText.copyWith(color: Colors.black.withOpacity(0.8)),
+              style: labelText.copyWith(color: Palette.getTextColor(isDarkMode).withOpacity(0.8)),
             )
           ],
         ),
@@ -46,7 +46,7 @@ Container postListTile(
         Text(
           posts.text,
           style: labelText.copyWith(
-            color: Colors.black.withOpacity(0.9),
+            color: Palette.getTextColor(isDarkMode).withOpacity(0.9),
           ),
         ),
         SizedBox(

@@ -18,7 +18,13 @@ class _ProfilePageState extends State<ProfilePage> {
     final _appUserVM = Provider.of<AppUserVM>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Profile"),
+        backgroundColor: Palette.getMainColor(_appUserVM.isDarkTheme),
+        title: Text(
+          "My Profile",
+          style: TextStyle(
+            color: Palette.getTextColor(_appUserVM.isDarkTheme),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -61,7 +67,9 @@ class _ProfilePageState extends State<ProfilePage> {
               Container(
                 height: DynamicSize.dynamicHeight(context, 0.60),
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: Palette.GRADIENT_COLOR),
+                    gradient: LinearGradient(
+                        colors:
+                            Palette.getGradientColor(_appUserVM.isDarkTheme)),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40),
                         topRight: Radius.circular(40))),
@@ -77,7 +85,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: TextButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.orange.shade900)),
+                                  Palette.getProfileBackground(
+                                      _appUserVM.isDarkTheme))),
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, NavigationConstants.RECENT_ACTIVITIES);
@@ -98,7 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: TextButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.orange.shade900)),
+                                  Palette.getProfileBackground(
+                                      _appUserVM.isDarkTheme))),
                           onPressed: () {
                             Navigator.pushNamed(
                                 context, NavigationConstants.MY_FANDOMS);

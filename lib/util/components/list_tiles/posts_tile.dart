@@ -47,6 +47,7 @@ Container postListTile(
           posts.text,
           style: labelText.copyWith(
             color: Palette.getTextColor(isDarkMode).withOpacity(0.9),
+            fontWeight: FontWeight.normal
           ),
         ),
         SizedBox(

@@ -12,6 +12,7 @@ import 'package:fandom_app/services/base/database/db_news_methods.dart';
 import 'package:fandom_app/services/base/database/db_pages_methods.dart';
 import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class FirestoreDB
@@ -33,15 +34,14 @@ class FirestoreDB
         .snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => News.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => News.fromMap(doc.data())).toList());
   }
 
   @override
   Future<AppUser> getUser({@required String uid}) async {
     try {
       DocumentSnapshot user =
-      await _firestore.collection("users").doc(uid).get();
+          await _firestore.collection("users").doc(uid).get();
       Map<String, dynamic> userData = user.data();
       AppUser newUser = AppUser.fromMap(userData);
       print("user object: " + newUser.uid);
@@ -71,8 +71,7 @@ class FirestoreDB
     Stream<QuerySnapshot> qp = _firestore.collection('Fandom').snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
   }
 
   @override
@@ -97,8 +96,7 @@ class FirestoreDB
         .snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
   }
 
   @override
@@ -135,8 +133,7 @@ class FirestoreDB
         .snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => Posts.fromMap(doc.data())).toList());
   }
 
   @override
@@ -147,18 +144,24 @@ class FirestoreDB
         .snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => Fandom.fromMap(doc.data())).toList());
   }
 
   @override
   Future<bool> joinFandom({String uid, Fandom fandom, bool changeTo}) async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
     try {
       fandom.members[uid] = changeTo;
       await _firestore
           .collection("Fandom")
           .doc(fandom.fid)
           .update(fandom.toMap());
+
+      if (changeTo) {
+        messaging.subscribeToTopic("${fandom.fid}");
+      } else {
+        messaging.unsubscribeFromTopic("${fandom.fid}");
+      }
       return true;
     } catch (e) {
       print(e.toString());
@@ -174,17 +177,16 @@ class FirestoreDB
         .snapshots();
 
     return qp.map(
-            (docs) =>
-            docs.docs.map((doc) => Pages.fromMap(doc.data())).toList());
+        (docs) => docs.docs.map((doc) => Pages.fromMap(doc.data())).toList());
   }
 
   @override
   Future<bool> createFandom({Fandom fandom}) async {
     try {
       DocumentReference ref =
-      await _firestore.collection("Fandom").add(fandom.toMap());
+          await _firestore.collection("Fandom").add(fandom.toMap());
       print(ref.id);
-      fandom.fid=ref.id;
+      fandom.fid = ref.id;
       await _firestore.collection("Fandom").doc(ref.id).update(fandom.toMap());
     } catch (e) {
       return false;
@@ -198,7 +200,7 @@ class FirestoreDB
       DocumentReference ref =
           await _firestore.collection("pages").add(page.toMap());
       print(ref.id);
-      page.pid= ref.id;
+      page.pid = ref.id;
       await _firestore.collection("pages").doc(ref.id).update(page.toMap());
     } catch (e) {
       return false;

@@ -72,7 +72,8 @@ class SendAnnouncement{
                       _formKey.currentState.save();
                       announcement.fid = fandom.fid;
                       postImage!= null ? announcement.imageUrl=postImage.path: announcement.imageUrl="";
-                      FandomMoreVM().setAnnouncement(announcements: announcement);
+                      FandomMoreVM().setAnnouncement(announcements: announcement, fandomName: fandom.name);
+                      Navigator.pop(context);
                     }
                   },
                   child: Text("Announce it"),

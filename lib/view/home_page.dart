@@ -2,9 +2,12 @@ import 'package:fandom_app/models/app_user.dart';
 import 'package:fandom_app/models/news.dart';
 import 'package:fandom_app/util/components/list_tiles/news_list_tile.dart';
 import 'package:fandom_app/util/constants/palette.dart';
+import 'package:fandom_app/util/init/notifications.dart';
 import 'package:fandom_app/view/tab_layout.dart';
 import 'package:fandom_app/view_models/app_user_view_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +21,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+    NotificationInitializer.foregroundNotification();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,9 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         print("${_newsVM[index].title}");
                         return newsListTile(
-                            context: context, news: _newsVM[index],isDarkMode:_appUserVM.isDarkTheme);
+                            context: context,
+                            news: _newsVM[index],
+                            isDarkMode: _appUserVM.isDarkTheme);
                       },
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,

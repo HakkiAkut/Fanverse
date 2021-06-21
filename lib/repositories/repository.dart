@@ -15,6 +15,7 @@ import 'package:fandom_app/services/base/database/db_posts_methods.dart';
 import 'package:fandom_app/services/base/database/db_user_methods.dart';
 import 'package:fandom_app/services/base/storage_methods.dart';
 import 'package:fandom_app/services/firebase/auth.dart';
+import 'package:fandom_app/services/firebase/fcm_notifications.dart';
 import 'package:fandom_app/services/firebase/firestore_db.dart';
 import 'package:fandom_app/services/firebase/storage.dart';
 import 'package:fandom_app/util/constants/StorageService.dart';
@@ -36,10 +37,12 @@ class Repository
         FandomMethods,
         AnnouncementsMethods,
         PostsMethods,
-        StorageMethods, PagesMethods {
+        StorageMethods,
+        PagesMethods {
   Auth _auth = serviceLocator<Auth>();
   Storage _storage = serviceLocator<Storage>();
   FirestoreDB _firestore = serviceLocator<FirestoreDB>();
+  FCMNotifications _notification = serviceLocator<FCMNotifications>();
   WebService _webService = WebService.FIREBASE;
   StorageService _storageService = StorageService.FIREBASE;
   DatabaseService _databaseService = DatabaseService.FIRESTORE;
@@ -151,17 +154,24 @@ class Repository
   }
 
   @override
-  Future<bool> setPost({Posts post}) {
+  Future<bool> setPost({Posts post, String username, String fandomName}) async {
+    print("REPO-- $username, $fandomName, ${post.text}");
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return _firestore.setPost(post: post);
+      bool ret = await _firestore.setPost(post: post);
+      _notification.sendNotification(
+          topic: post.fid, title: "$fandomName - $username", body: post.text);
+      return ret;
     }
     return null;
   }
 
   @override
-  Future<bool> setAnnouncement({Announcements announcements}) {
+  Future<bool> setAnnouncement({Announcements announcements, String fandomName}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return _firestore.setAnnouncement(announcements: announcements);
+      bool ret = await _firestore.setAnnouncement(announcements: announcements);
+      _notification.sendNotification(
+          topic: announcements.fid, title: "$fandomName", body: announcements.text);
+      return ret;
     }
     return null;
   }
@@ -193,7 +203,8 @@ class Repository
   @override
   Future<bool> joinFandom({String uid, Fandom fandom, bool changeTo}) async {
     if (_databaseService == DatabaseService.FIRESTORE) {
-      return await _firestore.joinFandom(uid: uid, fandom: fandom,changeTo: changeTo);
+      return await _firestore.joinFandom(
+          uid: uid, fandom: fandom, changeTo: changeTo);
     }
     return null;
   }
@@ -208,7 +219,7 @@ class Repository
 
   @override
   Future<bool> createFandom({Fandom fandom}) async {
-    if (_databaseService==DatabaseService.FIRESTORE){
+    if (_databaseService == DatabaseService.FIRESTORE) {
       return await _firestore.createFandom(fandom: fandom);
     }
     return false;
@@ -216,7 +227,7 @@ class Repository
 
   @override
   Future<bool> createPage({Pages page}) async {
-    if (_databaseService==DatabaseService.FIRESTORE){
+    if (_databaseService == DatabaseService.FIRESTORE) {
       return await _firestore.createPage(page: page);
     }
     return false;

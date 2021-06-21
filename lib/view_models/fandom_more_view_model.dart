@@ -36,22 +36,23 @@ class FandomMoreVM
   }
 
   @override
-  Future<bool> setPost({Posts post}) async {
+  Future<bool> setPost({Posts post,String username, String fandomName}) async {
+    print("VM-- $username, $fandomName, ${post.text}");
     if (post.imageUrl != "") {
       post.imageUrl =
           await uploadFile(uid: post.uid, uploadedFile: File(post.imageUrl));
     }
-    return _repository.setPost(post: post);
+    return _repository.setPost(post: post,username: username,fandomName: fandomName);
   }
 
   @override
-  Future<bool> setAnnouncement({Announcements announcements}) async {
+  Future<bool> setAnnouncement({Announcements announcements, String fandomName}) async {
     if (announcements.imageUrl != "") {
       announcements.imageUrl = await uploadFile(
           uid: "${announcements.fid}_Announcement",
           uploadedFile: File(announcements.imageUrl));
     }
-    return _repository.setAnnouncement(announcements: announcements);
+    return _repository.setAnnouncement(announcements: announcements, fandomName: fandomName);
   }
 
   @override

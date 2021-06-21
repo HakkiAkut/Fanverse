@@ -53,14 +53,15 @@ class SendPost {
               ),
               actions: <Widget>[
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
                       post.uid = appUser.uid;
                       post.fid = fandom.fid;
                       post.username = appUser.username;
                       postImage!= null ? post.imageUrl=postImage.path: post.imageUrl="";
-                      FandomMoreVM().setPost(post: post);
+                      await FandomMoreVM().setPost(post: post,username: appUser.username,fandomName: fandom.name);
+                      Navigator.pop(context);
                     }
                   },
                   child: Text("Post"),

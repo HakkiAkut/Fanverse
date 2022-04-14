@@ -56,7 +56,7 @@ With using bottoom navigator, we can reach post page of the fandom
 
 ![fandom posts](https://user-images.githubusercontent.com/32385870/163373662-386e1465-7ba2-4b98-805e-1bbed76963de.png)
 
-With clicking the button at the top right corner, we can be a member of this fandom. After that we can send posts too
+With clicking the button at the top right corner, we can be a member of this fandom. After that we can send posts (with image) too
 
 ![fandom membership](https://user-images.githubusercontent.com/32385870/163374212-f07b817d-186a-4cb2-b6ba-c6a1b6f1fd22.png)
 ![send post](https://user-images.githubusercontent.com/32385870/163375524-ada4e21d-3a79-4a56-a6c9-0fecc661f10a.png)
